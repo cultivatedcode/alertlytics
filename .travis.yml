@@ -1,0 +1,21 @@
+language: elixir
+cache:
+  directories:
+  - deps
+  - _build
+elixir:
+  - 1.8.0
+otp_release:
+  - 21
+env:
+  global:
+    - MIX_ENV=test
+    - MAIN_BRANCHES="master"
+install:
+  - mix local.hex --force
+  - mix local.rebar --force
+  - mix deps.get
+script:
+  - "mix format --dry-run --check-formatted"
+  - "mix test --exclude pending --trace --no-start"
+  - "mix coveralls.travis"

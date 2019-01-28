@@ -3,17 +3,17 @@ defmodule SitrepTest do
   doctest Sitrep
 
   setup do
-    {:ok,app_pid} = Sitrep.start(nil,nil)
+    {:ok, app_pid} = Sitrep.start(nil, nil)
     {:ok, app: app_pid}
   end
 
   test "workers available" do
     assert [
-              %{
-                "health_check_url" => "https://www.cultivatedcode.com",
-                "name" => "production",
-                "type" => "web"
-              }
-            ] == Sitrep.Workers.Config.services
+             %{
+               "health_check_url" => "https://www.cultivatedcode.com",
+               "name" => "marketing-site",
+               "type" => "web"
+             }
+           ] == Sitrep.Workers.Config.services()
   end
 end
