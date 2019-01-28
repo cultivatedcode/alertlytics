@@ -18,4 +18,4 @@ install:
 script:
   - "mix format --dry-run --check-formatted"
   - "mix test --exclude pending --trace --no-start"
-  - "mix coveralls.travis"
+  - "mix coveralls.travis --no-start"
