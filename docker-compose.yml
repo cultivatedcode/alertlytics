@@ -1,0 +1,12 @@
+---
+version: '2'
+services:
+  sitrep:
+    container_name: sitrep
+    volumes:
+    - ".:/home/app"
+    build: "."
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
