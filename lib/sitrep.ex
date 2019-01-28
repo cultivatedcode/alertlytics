@@ -5,7 +5,8 @@ defmodule Sitrep do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Sitrep.Workers.Config, ["test/fixtures/config.json"])
+      worker(Sitrep.Workers.Config, ["test/fixtures/config.json"]),
+      worker(Sitrep.Workers.Bootstrap, [])
     ]
 
     opts = [strategy: :one_for_one, name: Sitrep.Supervisor]

@@ -7,7 +7,7 @@ defmodule SitrepTest do
     {:ok, app: app_pid}
   end
 
-  test "workers available" do
+  test "config service is available" do
     assert [
              %{
                "health_check_url" => "https://www.cultivatedcode.com",
