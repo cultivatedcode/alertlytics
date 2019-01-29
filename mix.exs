@@ -27,6 +27,7 @@ defmodule Sitrep.MixProject do
 
   defp deps do
     [
+      {:httpoison, "~> 0.13"},
       {:poison, "~> 3.1"},
       {:remix, "~> 0.0.1", only: :dev},
       {:excoveralls, "~> 0.10", only: :test}

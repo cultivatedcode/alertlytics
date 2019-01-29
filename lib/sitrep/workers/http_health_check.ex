@@ -1,0 +1,43 @@
+defmodule Sitrep.Workers.HttpHealthCheck do
+  use GenServer
+
+  # Client
+
+  def start_link([], service_config) do
+    start_link(service_config)
+  end
+
+  def start_link(service_config) do
+    GenServer.start_link(__MODULE__, service_config)
+  end
+
+  # Server (Callbacks)
+
+  def init(service_config) do
+    delay = service_config["test_interval_in_minutes"] * 1_000
+    schedule_work(delay)
+    {:ok, %{service_config: service_config, delay: delay, is_live: nil}}
+  end
+
+  def handle_info(:work, state) do
+    url = state[:service_config]["health_check_url"]
+    is_live_now = Sitrep.Services.HttpService.check(url)
+
+    if is_live_now != state[:is_live] && state[:is_live] != nil do
+      IO.puts("Send Alert")
+    end
+
+    schedule_work(state[:delay])
+
+    {:noreply,
+     %{service_config: state[:service_config], delay: state[:delay], is_live: is_live_now}}
+  end
+
+  def handle_info(_, state) do
+    {:ok, state}
+  end
+
+  defp schedule_work(delay_in_minutes) do
+    Process.send_after(self(), :work, delay_in_minutes)
+  end
+end

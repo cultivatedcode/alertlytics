@@ -1,1 +1,1 @@
-mix coveralls --no-start
+mix coveralls.detail --no-start

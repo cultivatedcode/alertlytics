@@ -12,7 +12,8 @@ defmodule SitrepTest do
              %{
                "health_check_url" => "https://www.cultivatedcode.com",
                "name" => "marketing-site",
-               "type" => "web"
+               "type" => "web",
+               "test_interval_in_minutes" => 10
              }
            ] == Sitrep.Workers.Config.services()
   end
