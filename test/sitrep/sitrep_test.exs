@@ -1,9 +1,10 @@
 defmodule SitrepTest do
   use ExUnit.Case
+  alias Sitrep, as: Subject
   doctest Sitrep
 
   setup do
-    {:ok, app_pid} = Sitrep.start(nil, nil)
+    {:ok, app_pid} = Subject.start(nil, nil)
     {:ok, app: app_pid}
   end
 

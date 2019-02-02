@@ -6,6 +6,8 @@ defmodule Sitrep do
 
     children = [
       worker(Sitrep.Workers.Config, ["test/fixtures/config.json"]),
+      worker(Sitrep.Workers.Alert, []),
+      worker(Sitrep.MonitorSupervisor, []),
       worker(Sitrep.Workers.Bootstrap, [])
     ]
 

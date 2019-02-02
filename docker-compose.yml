@@ -10,3 +10,6 @@ services:
       - .env
     stdin_open: true
     tty: true
+  web:
+    container_name: web
+    image: kitematic/hello-world-nginx

@@ -23,12 +23,13 @@ defmodule Sitrep.Workers.HttpHealthCheck do
     url = state[:service_config]["health_check_url"]
     is_live_now = Sitrep.Services.HttpService.check(url)
 
-    if is_live_now != state[:is_live] && state[:is_live] != nil do
-      IO.puts("Send Alert")
-    end
+    Sitrep.Workers.Alert.optionally_send_alert(
+      state[:service_config],
+      state[:is_live],
+      is_live_now
+    )
 
     schedule_work(state[:delay])
-
     {:noreply,
      %{service_config: state[:service_config], delay: state[:delay], is_live: is_live_now}}
   end

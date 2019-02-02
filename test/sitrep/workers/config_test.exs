@@ -1,9 +1,10 @@
 defmodule ConfigTest do
   use ExUnit.Case
+  alias Sitrep.Workers.Config, as: Subject
   doctest Sitrep.Workers.Config
 
   setup do
-    {:ok, server_pid} = Sitrep.Workers.Config.start_link("test/fixtures/config.json")
+    {:ok, server_pid} = Subject.start_link("test/fixtures/config.json")
     {:ok, server: server_pid}
   end
 
@@ -15,6 +16,6 @@ defmodule ConfigTest do
                "type" => "web",
                "test_interval_in_minutes" => 10
              }
-           ] == Sitrep.Workers.Config.services()
+           ] == Subject.services()
   end
 end

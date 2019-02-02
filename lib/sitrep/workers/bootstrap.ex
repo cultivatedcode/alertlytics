@@ -23,7 +23,7 @@ defmodule Sitrep.Workers.Bootstrap do
     IO.puts("------------------------")
 
     Enum.each(services, fn service ->
-      IO.inspect(service)
+      Sitrep.MonitorSupervisor.add_monitor(service)
     end)
 
     {:ok, init_arg}
