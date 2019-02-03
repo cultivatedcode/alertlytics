@@ -5,7 +5,7 @@ defmodule Sitrep do
     import Supervisor.Spec, warn: false
 
     config_path = Application.get_env(:sitrep, Sitrep)[:config_path] || "/etc/sitrep/config.json"
-    
+
     children = [
       worker(Sitrep.Workers.Config, [config_path]),
       worker(Sitrep.Workers.Alert, []),
