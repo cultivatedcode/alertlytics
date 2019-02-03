@@ -12,6 +12,7 @@ defmodule Sitrep.Workers.Config do
     Starts the config server.
   """
   def start_link(config_file_path) do
+    IO.puts("Loading config file '#{config_file_path}'.")
     if File.exists?(config_file_path) do
       GenServer.start_link(__MODULE__, [config_file_path], name: __MODULE__)
     else
