@@ -17,5 +17,6 @@ install:
   - mix deps.get
 script:
   - "mix format --dry-run --check-formatted"
+  - "mkdir /etc/sitrep && cp sitrep-config.json /etc/sitrep/config.json"
   - "mix test --exclude pending --trace --no-start"
   - "mix coveralls.travis --no-start"
