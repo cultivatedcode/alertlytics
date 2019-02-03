@@ -30,7 +30,8 @@ defmodule Sitrep.MixProject do
       {:httpoison, "~> 0.13"},
       {:poison, "~> 3.1"},
       {:remix, "~> 0.0.1", only: :dev},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:distillery, "~> 2.0"}
     ]
   end
 end

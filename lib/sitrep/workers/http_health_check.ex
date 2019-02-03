@@ -30,6 +30,7 @@ defmodule Sitrep.Workers.HttpHealthCheck do
     )
 
     schedule_work(state[:delay])
+
     {:noreply,
      %{service_config: state[:service_config], delay: state[:delay], is_live: is_live_now}}
   end

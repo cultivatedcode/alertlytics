@@ -12,7 +12,12 @@ defmodule Sitrep.Workers.Config do
     Starts the config server.
   """
   def start_link(config_file_path) do
-    GenServer.start_link(__MODULE__, [config_file_path], name: __MODULE__)
+    if File.exists?(config_file_path) do
+      GenServer.start_link(__MODULE__, [config_file_path], name: __MODULE__)
+    else
+      {:ok, working_dir} = File.cwd()
+      raise "Error #{config_file_path} not found in #{working_dir}"
+    end
   end
 
   @doc """

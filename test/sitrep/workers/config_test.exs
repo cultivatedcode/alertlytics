@@ -18,4 +18,12 @@ defmodule ConfigTest do
              }
            ] == Subject.services()
   end
+
+  test "config file missing" do
+    assert_raise RuntimeError,
+                 "Error test/fixtures/does-not-exist.json not found in /home/app",
+                 fn ->
+                   Subject.start_link("test/fixtures/does-not-exist.json")
+                 end
+  end
 end

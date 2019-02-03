@@ -15,6 +15,12 @@ defmodule SitrepTest do
                "name" => "marketing-site",
                "type" => "web",
                "test_interval_in_minutes" => 10
+             },
+             %{
+               "health_check_url" => "http://web",
+               "name" => "other",
+               "test_interval_in_minutes" => 50,
+               "type" => "web"
              }
            ] == Sitrep.Workers.Config.services()
   end

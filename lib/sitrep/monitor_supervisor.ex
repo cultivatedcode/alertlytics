@@ -6,7 +6,7 @@ defmodule Sitrep.MonitorSupervisor do
   end
 
   def add_monitor(service_config) do
-    IO.puts "Adding #{service_config["name"]}"
+    IO.puts("Adding #{service_config["name"]}")
     spec = {Sitrep.Workers.HttpHealthCheck, service_config}
     DynamicSupervisor.start_child(__MODULE__, spec)
   end
