@@ -1,12 +1,23 @@
 defmodule Sitrep.Workers.HttpHealthCheck do
   use GenServer
 
+  @moduledoc """
+  Documentation for HttpHealthCheck.
+  Checks http web services for the health status based on the services configured interval.
+  """
+
   # Client
 
+  @doc """
+    Starts the http health check server for dynamic supervision.
+  """
   def start_link([], service_config) do
     start_link(service_config)
   end
 
+  @doc """
+    Starts the http health check server.
+  """
   def start_link(service_config) do
     GenServer.start_link(__MODULE__, service_config)
   end
