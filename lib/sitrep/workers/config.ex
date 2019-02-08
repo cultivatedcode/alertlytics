@@ -23,6 +23,13 @@ defmodule Sitrep.Workers.Config do
   end
 
   @doc """
+    Returns the slack channel to use for alerts.
+  """
+  def channel do
+    GenServer.call(__MODULE__, {:channel})
+  end
+
+  @doc """
     Returns a list of service configurations from the config file.
   """
   def services do
@@ -42,5 +49,11 @@ defmodule Sitrep.Workers.Config do
   def handle_call({:services}, _from, json) do
     services = json["services"]
     {:reply, services, json}
+  end
+
+  @impl true
+  def handle_call({:channel}, _from, json) do
+    channel = json["channel"]
+    {:reply, channel, json}
   end
 end

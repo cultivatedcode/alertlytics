@@ -9,7 +9,7 @@ defmodule MonitorSupervisorTest do
         "health_check_url" => "https://www.cultivatedcode.com",
         "name" => "marketing-site",
         "type" => "web",
-        "test_interval_in_minutes" => 10
+        "test_interval_in_minutes" => 5
       })
 
     assert pid != nil

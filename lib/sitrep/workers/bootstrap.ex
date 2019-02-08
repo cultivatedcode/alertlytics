@@ -26,6 +26,6 @@ defmodule Sitrep.Workers.Bootstrap do
       Sitrep.MonitorSupervisor.add_monitor(service)
     end)
 
-    {:ok, init_arg}
+    {:ok, true}
   end
 end

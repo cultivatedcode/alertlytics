@@ -14,9 +14,13 @@ defmodule ConfigTest do
                "health_check_url" => "https://www.cultivatedcode.com",
                "name" => "marketing-site",
                "type" => "web",
-               "test_interval_in_minutes" => 10
+               "test_interval_in_minutes" => 5
              }
            ] == Subject.services()
+  end
+
+  test "channel" do
+    assert "#alerts" == Subject.channel()
   end
 
   test "config file missing" do

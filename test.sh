@@ -1,2 +1,2 @@
 #!/bin/sh
-mix coveralls.detail --no-start
+SLACK_TOKEN=fake mix coveralls.detail --no-start

@@ -1,16 +1,17 @@
 {
+   "channel": "#commits",
    "services": 
    [{
       "type": "web",
       "name": "marketing-site",
       "health_check_url": "https://www.cultivatedcode.com",
-      "test_interval_in_minutes": 10
+      "test_interval_in_minutes": 5
    },
    {
       "type": "web",
       "name": "other",
       "health_check_url": "http://web",
-      "test_interval_in_minutes": 50
+      "test_interval_in_minutes": 1
    }
    ]
 }

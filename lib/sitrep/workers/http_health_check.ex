@@ -25,7 +25,7 @@ defmodule Sitrep.Workers.HttpHealthCheck do
   # Server (Callbacks)
 
   def init(service_config) do
-    delay = service_config["test_interval_in_minutes"] * 1_000
+    delay = service_config["test_interval_in_minutes"] * 60_000
     schedule_work(delay)
     {:ok, %{service_config: service_config, delay: delay, is_live: nil}}
   end
