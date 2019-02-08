@@ -1,4 +1,4 @@
-defmodule Sitrep.Workers.Config do
+defmodule Alertlytics.Workers.Config do
   use GenServer
 
   @moduledoc """

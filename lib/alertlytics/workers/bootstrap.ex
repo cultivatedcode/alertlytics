@@ -1,4 +1,4 @@
-defmodule Sitrep.Workers.Bootstrap do
+defmodule Alertlytics.Workers.Bootstrap do
   use GenServer
 
   @moduledoc """
@@ -18,12 +18,12 @@ defmodule Sitrep.Workers.Bootstrap do
   # Server (Callbacks)
 
   def init(init_arg) do
-    services = Sitrep.Workers.Config.services()
+    services = Alertlytics.Workers.Config.services()
     IO.puts("Initializing monitoring.")
     IO.puts("------------------------")
 
     Enum.each(services, fn service ->
-      Sitrep.MonitorSupervisor.add_monitor(service)
+      Alertlytics.MonitorSupervisor.add_monitor(service)
     end)
 
     {:ok, true}

@@ -1,4 +1,4 @@
-defmodule Sitrep.Workers.Slack do
+defmodule Alertlytics.Workers.Slack do
   use Slack
   
   # Catch all message handler so we don't crash

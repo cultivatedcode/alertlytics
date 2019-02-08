@@ -1,4 +1,4 @@
-defmodule Sitrep.Services.HttpService do
+defmodule Alertlytics.Services.HttpService do
   @moduledoc """
   Documentation for HttpService.
   Checks if the given url returns status 200.

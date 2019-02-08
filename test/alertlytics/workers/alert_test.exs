@@ -1,10 +1,10 @@
 defmodule AlertTest do
   use ExUnit.Case
-  alias Sitrep.Workers.Alert, as: Subject
-  doctest Sitrep.Workers.Alert
+  alias Alertlytics.Workers.Alert, as: Subject
+  doctest Alertlytics.Workers.Alert
 
   setup do
-    Sitrep.Workers.Config.start_link("test/fixtures/config.json")
+    Alertlytics.Workers.Config.start_link("test/fixtures/config.json")
     Subject.start_link()
 
     service_config = %{

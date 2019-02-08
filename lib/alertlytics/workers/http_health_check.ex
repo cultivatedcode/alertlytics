@@ -1,4 +1,4 @@
-defmodule Sitrep.Workers.HttpHealthCheck do
+defmodule Alertlytics.Workers.HttpHealthCheck do
   use GenServer
 
   @moduledoc """
@@ -32,9 +32,9 @@ defmodule Sitrep.Workers.HttpHealthCheck do
 
   def handle_info(:work, state) do
     url = state[:service_config]["health_check_url"]
-    is_live_now = Sitrep.Services.HttpService.check(url)
+    is_live_now = Alertlytics.Services.HttpService.check(url)
 
-    Sitrep.Workers.Alert.optionally_send_alert(
+    Alertlytics.Workers.Alert.optionally_send_alert(
       state[:service_config],
       state[:is_live],
       is_live_now

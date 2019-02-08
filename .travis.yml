@@ -10,7 +10,7 @@ otp_release:
 env:
   global:
     - MIX_ENV=test
-    - CONFIG_PATH=sitrep-config.json
+    - CONFIG_PATH=alertlytics-config.json
     - MAIN_BRANCHES="master"
 install:
   - mix local.hex --force

@@ -1,4 +1,4 @@
-defmodule Sitrep.MonitorSupervisor do
+defmodule Alertlytics.MonitorSupervisor do
   use DynamicSupervisor
 
   def start_link do
@@ -7,7 +7,7 @@ defmodule Sitrep.MonitorSupervisor do
 
   def add_monitor(service_config) do
     IO.puts("Adding #{service_config["name"]}")
-    spec = {Sitrep.Workers.HttpHealthCheck, service_config}
+    spec = {Alertlytics.Workers.HttpHealthCheck, service_config}
     DynamicSupervisor.start_child(__MODULE__, spec)
   end
 

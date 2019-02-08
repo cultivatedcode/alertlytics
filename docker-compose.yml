@@ -1,8 +1,8 @@
 ---
 version: '2'
 services:
-  sitrep:
-    container_name: sitrep
+  alertlytics:
+    container_name: alertlytics
     volumes:
     - ".:/home/app"
     build: "."

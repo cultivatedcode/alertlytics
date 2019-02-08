@@ -1,2 +1,2 @@
 #!/bin/sh
-docker-compose build sitrep
+docker-compose build alertlytics

@@ -1,4 +1,4 @@
-defmodule Sitrep.Workers.Alert do
+defmodule Alertlytics.Workers.Alert do
   use GenServer
 
   @moduledoc """
@@ -32,7 +32,7 @@ defmodule Sitrep.Workers.Alert do
     message_sent =
       if previous_is_live != new_is_live && previous_is_live != nil do
         IO.puts("ALERTING")
-        channel = Sitrep.Workers.Config.channel()
+        channel = Alertlytics.Workers.Config.channel()
         if new_is_live do
           Slack.Web.Chat.post_message(channel, "testing", %{attachments: 
             "[{'color': '#36a64f', 'title': '`#{service_config["name"]}` health check fixed', 'ts': #{DateTime.to_unix(DateTime.utc_now)}}]"

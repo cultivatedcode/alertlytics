@@ -1,9 +1,9 @@
-defmodule Sitrep.MixProject do
+defmodule Alertlytics.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :sitrep,
+      app: :alertlytics,
       version: "0.1.0",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
@@ -21,7 +21,7 @@ defmodule Sitrep.MixProject do
   def application do
     [
       extra_applications: [:logger, :slack],
-      mod: {Sitrep, []}
+      mod: {Alertlytics, []}
     ]
   end
 

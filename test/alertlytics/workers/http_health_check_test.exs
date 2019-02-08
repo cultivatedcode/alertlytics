@@ -1,7 +1,7 @@
 defmodule HttpHealthCheckTest do
   use ExUnit.Case, async: true
-  alias Sitrep.Workers.HttpHealthCheck, as: Subject
-  doctest Sitrep.Workers.HttpHealthCheck
+  alias Alertlytics.Workers.HttpHealthCheck, as: Subject
+  doctest Alertlytics.Workers.HttpHealthCheck
 
   test "start_link" do
     {:ok, pid} =

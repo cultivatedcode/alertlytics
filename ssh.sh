@@ -1,2 +1,2 @@
 #!/bin/sh
-docker exec -it sitrep bash
+docker exec -it alertlytics bash

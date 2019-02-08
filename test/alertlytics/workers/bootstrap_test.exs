@@ -1,11 +1,11 @@
 defmodule BootstrapTest do
   use ExUnit.Case
-  alias Sitrep.Workers.Bootstrap, as: Subject
-  doctest Sitrep.Workers.Bootstrap
+  alias Alertlytics.Workers.Bootstrap, as: Subject
+  doctest Alertlytics.Workers.Bootstrap
 
   setup do
-    Sitrep.Workers.Config.start_link("test/fixtures/config.json")
-    Sitrep.MonitorSupervisor.start_link()
+    Alertlytics.Workers.Config.start_link("test/fixtures/config.json")
+    Alertlytics.MonitorSupervisor.start_link()
     {:ok, pid} = Subject.start_link()
     {:ok, server: pid}
   end

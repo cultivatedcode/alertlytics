@@ -1,7 +1,7 @@
 defmodule HttpServiceTest do
   use ExUnit.Case
-  alias Sitrep.Services.HttpService, as: Subject
-  doctest Sitrep.Services.HttpService
+  alias Alertlytics.Services.HttpService, as: Subject
+  doctest Alertlytics.Services.HttpService
 
   test "good url" do
     assert true == Subject.check("https://www.cultivatedcode.com")

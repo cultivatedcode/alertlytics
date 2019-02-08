@@ -1,7 +1,7 @@
 defmodule ConfigTest do
   use ExUnit.Case
-  alias Sitrep.Workers.Config, as: Subject
-  doctest Sitrep.Workers.Config
+  alias Alertlytics.Workers.Config, as: Subject
+  doctest Alertlytics.Workers.Config
 
   setup do
     {:ok, server_pid} = Subject.start_link("test/fixtures/config.json")
