@@ -27,4 +27,4 @@ Alertlytics using slack as it's notification engine.  Go to slack and create a c
 
 `docker run -d -e SLACK_TOKEN=your-token-here -v $PWD/alertlytics-config.json:/etc/alertlytics/config.json cultivatedcode/alertlytics`
 
-In slack you should see your bot come online.  To view the status of the monitoring you can view docker logs.
+In slack you should see your bot come online.  To view the status of the monitoring you can view docker logs. 
