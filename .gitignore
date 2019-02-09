@@ -9,4 +9,4 @@ erl_crash.dump
 /config/*.secret.exs
 .env
 /rel
-alertlytics-config.json
+prod-config.json

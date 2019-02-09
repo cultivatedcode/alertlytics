@@ -7,7 +7,16 @@ defmodule Alertlytics do
     slack_token = Application.get_env(:alertlytics, Alertlytics.Workers.Slack)[:token]
     IO.puts("token '#{slack_token}'")
 
-    config_path = Application.get_env(:alertlytics, Alertlytics)[:config_path] || "/etc/alertlytics/config.json"
+    config_path = case Application.get_env(:sitrep, Sitrep)[:config_path] do
+      nil ->
+        "/etc/alertlytics/config.json"
+      "" ->
+        "/etc/alertlytics/config.json"
+      _ ->
+        Application.get_env(:sitrep, Sitrep)[:config_path]
+      end
+
+    IO.puts("config_path: '#{config_path}'")
 
     children = [
       worker(Alertlytics.Workers.Config, [config_path]),

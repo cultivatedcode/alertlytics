@@ -45,8 +45,8 @@ end
 # when running `mix release`, the first release in the file
 # will be used by default
 
-release :sitrep do
-  set version: current_version(:sitrep)
+release :alertlytics do
+  set version: current_version(:alertlytics)
   set applications: [
     :runtime_tools
   ]
