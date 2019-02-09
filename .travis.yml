@@ -20,4 +20,3 @@ script:
   - "mix format --dry-run --check-formatted"
   - "mix test --exclude pending --trace --no-start"
   - "mix coveralls.travis --no-start"
-  - "docker build -t=cultivatedcode/alertlytics:latest -f Dockerfile.prod ."
