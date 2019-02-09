@@ -22,12 +22,16 @@ defmodule AlertTest do
     assert result == nil
   end
 
-  test "handle_cast/2 when status has changed from false to true", %{service_config: service_config} do
+  test "handle_cast/2 when status has changed from false to true", %{
+    service_config: service_config
+  } do
     {:noreply, result} = Subject.handle_cast({:send_alert, service_config, false, true}, [])
     assert result == true
   end
 
-  test "handle_cast/2 when status has changed from true to false", %{service_config: service_config} do
+  test "handle_cast/2 when status has changed from true to false", %{
+    service_config: service_config
+  } do
     {:noreply, result} = Subject.handle_cast({:send_alert, service_config, true, false}, [])
     assert result == false
   end

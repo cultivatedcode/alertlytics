@@ -33,15 +33,24 @@ defmodule Alertlytics.Workers.Alert do
       if previous_is_live != new_is_live && previous_is_live != nil do
         IO.puts("ALERTING")
         channel = Alertlytics.Workers.Config.channel()
+
         if new_is_live do
-          Slack.Web.Chat.post_message(channel, "testing", %{attachments: 
-            "[{'color': '#36a64f', 'title': '`#{service_config["name"]}` health check fixed', 'ts': #{DateTime.to_unix(DateTime.utc_now)}}]"
+          Slack.Web.Chat.post_message(channel, "testing", %{
+            attachments:
+              "[{'color': '#36a64f', 'title': '`#{service_config["name"]}` health check fixed', 'ts': #{
+                DateTime.to_unix(DateTime.utc_now())
+              }}]"
           })
+
           true
         else
-          Slack.Web.Chat.post_message(channel, "testing", %{attachments: 
-            "[{'color': '#f90c0c', 'title': '`#{service_config["name"]}` health check failed', 'ts': #{DateTime.to_unix(DateTime.utc_now)}}]"
+          Slack.Web.Chat.post_message(channel, "testing", %{
+            attachments:
+              "[{'color': '#f90c0c', 'title': '`#{service_config["name"]}` health check failed', 'ts': #{
+                DateTime.to_unix(DateTime.utc_now())
+              }}]"
           })
+
           false
         end
       end

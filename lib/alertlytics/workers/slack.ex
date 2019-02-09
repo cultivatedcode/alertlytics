@@ -1,6 +1,6 @@
 defmodule Alertlytics.Workers.Slack do
   use Slack
-  
+
   # Catch all message handler so we don't crash
   def handle_connect(slack, state) do
     IO.puts("Connected as #{slack.me.name}")
@@ -8,12 +8,12 @@ defmodule Alertlytics.Workers.Slack do
   end
 
   def handle_event(message = %{type: "message"}, slack, state) do
-    if Regex.run ~r/<@#{slack.me.id}>:?\sping/, message.text do
+    if Regex.run(~r/<@#{slack.me.id}>:?\sping/, message.text) do
       send_message("<@#{message.user}> pong", message.channel, slack)
     else
       send_message("Hello world", message.channel, slack)
     end
-    
+
     {:ok, state}
   end
 
