@@ -1,15 +1,17 @@
 version: 2.1
 orbs:
-  anchore: anchore/anchore-engine@1.0.0
+  anchore: anchore/anchore-engine@1.2.0
 jobs:
   local_image_scan:
     executor: anchore/anchore_engine
     steps:
-      - checkout
+      - checkout:
+          path: ~/project/src/
       - run:
           name: build container
-          command: docker build -t ${CIRCLE_PROJECT_REPONAME}:ci -f Dockerfile.prod .
+          command: 'docker build -t "${CIRCLE_PROJECT_REPONAME}:ci" -f Dockerfile.prod ~/project/src/'
       - anchore/analyze_local_image:
-          image_name: ${CIRCLE_PROJECT_REPONAME}:ci
+          image_name: '${CIRCLE_PROJECT_REPONAME}:ci'
           timeout: '500'
-          analysis_fail: True
+          policy_failure: true
+      - anchore/parse_reports
