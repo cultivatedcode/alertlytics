@@ -22,6 +22,7 @@ defmodule AlertTest do
     assert result == nil
   end
 
+  @tag :skip
   test "handle_cast/2 when status has changed from false to true", %{
     service_config: service_config
   } do
@@ -29,6 +30,7 @@ defmodule AlertTest do
     assert result == true
   end
 
+  @tag :skip
   test "handle_cast/2 when status has changed from true to false", %{
     service_config: service_config
   } do
