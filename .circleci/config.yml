@@ -7,5 +7,4 @@ workflows:
       - anchore/image_scan:
           image_name: 'docker.io/cultivatedcode/alertlytics:latest'
           timeout: '300'
-      - anchore/parse_reports
 
