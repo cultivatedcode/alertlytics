@@ -6,6 +6,7 @@ Alertlytics works with a json config file that defines the end points you would 
 
 ```
 {
+   "channel": "#devops",
    "services": 
    [{
       "type": "web",
@@ -23,8 +24,8 @@ Alertlytics works with a json config file that defines the end points you would 
 }
 ```
 
-Alertlytics using slack as it's notification engine.  Go to slack and create a custom bot to get your slack API token.  Now you can start the Alertlytics docker container by passing in your slack token and config file via a volume mapping to /etc/alertlytics/config.json.  Something like this:
+Alertlytics uses slack as it's notification engine.  Go to slack and create a custom bot to get your slack API token.  Now you can start the Alertlytics docker container by passing in your slack token as an environment variable and config file via a volume mapping to /etc/alertlytics/config.json.  Something like this:
 
 `docker run -d -e SLACK_TOKEN=your-token-here -v $PWD/alertlytics-config.json:/etc/alertlytics/config.json cultivatedcode/alertlytics`
 
-In slack you should see your bot come online.  To view the status of the monitoring you can view docker logs. 
+In slack you should see your bot come online.  You will receive alerts of any services that do not respond with a 200 status code in the slack channel you have defined in the config.json.  To view the status of the monitoring you can view docker logs. 
