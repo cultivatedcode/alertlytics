@@ -1,6 +1,14 @@
 defmodule Alertlytics do
   use Application
 
+  @moduledoc """
+  Documentation for Alertlytics.
+  Alertlytics application main entry point.
+  """
+
+  @doc """
+    Starts the alertlytics application and starts the monitoring engine..
+  """
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
