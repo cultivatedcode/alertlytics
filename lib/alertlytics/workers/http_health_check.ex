@@ -19,13 +19,26 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     Starts the http health check server.
   """
   def start_link(service_config) do
-    GenServer.start_link(__MODULE__, service_config)
+    IO.puts("Registering Http Health Check (#{service_config["health_check_url"]})")
+
+    GenServer.start_link(__MODULE__, service_config,
+      name: via_tuple(service_config["health_check_url"])
+    )
+  end
+
+  def is_live(monitor_name) do
+    GenServer.call(via_tuple(monitor_name), :is_live)
+  end
+
+  defp via_tuple(monitor_name) do
+    {:via, Alertlytics.MonitorRegistry, {:health_check, monitor_name}}
   end
 
   # Server (Callbacks)
 
   def init(service_config) do
     delay = service_config["test_interval_in_minutes"] * 60_000
+    IO.puts("- Checking every #{service_config["test_interval_in_minutes"]} minutes.")
     schedule_work(delay)
     {:ok, %{service_config: service_config, delay: delay, is_live: nil}}
   end
@@ -48,6 +61,10 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   def handle_info(_, state) do
     {:ok, state}
+  end
+
+  def handle_call(:is_live, _from, state) do
+    {:reply, state[:is_live], state}
   end
 
   defp schedule_work(delay_in_minutes) do
