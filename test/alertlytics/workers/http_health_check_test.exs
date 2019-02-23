@@ -9,8 +9,7 @@ defmodule HttpHealthCheckTest do
   end
 
   test "start_link" do
-    {:ok, pid} =
-      Subject.start_link([], service_config())
+    {:ok, pid} = Subject.start_link([], service_config())
 
     assert pid != nil
   end

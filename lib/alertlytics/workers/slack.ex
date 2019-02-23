@@ -19,10 +19,37 @@ defmodule Alertlytics.Workers.Slack do
     Handler for any message received by the slack bot either in it's channel or when references `@chatops ping`.
   """
   def handle_event(message = %{type: "message"}, slack, state) do
-    if Regex.run(~r/<@#{slack.me.id}>:?\sping/, message.text) do
-      send_message("<@#{message.user}> pong", message.channel, slack)
-    else
-      send_message("Hello world", message.channel, slack)
+    if Regex.run(~r/<@#{slack.me.id}>:?\sstatus/, message.text) do
+      services = Alertlytics.Workers.Config.services()
+
+      service_statuses =
+        Enum.map(services, fn x ->
+          Alertlytics.Workers.HttpHealthCheck.is_live(x["health_check_url"])
+        end)
+
+      live_count = Enum.count(service_statuses, fn x -> x end)
+      all_services_count = Enum.count(service_statuses)
+
+      color =
+        if live_count == all_services_count do
+          "#36a64f"
+        else
+          "#f90c0c"
+        end
+
+      attachment =
+        [
+          %{
+            color: color,
+            title: "#{live_count} / #{all_services_count} healthy services",
+            ts: DateTime.to_unix(DateTime.utc_now())
+          }
+        ]
+        |> Poison.encode!()
+
+      Slack.Web.Chat.post_message(message.channel, "Status Report", %{
+        attachments: attachment
+      })
     end
 
     {:ok, state}
