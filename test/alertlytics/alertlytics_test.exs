@@ -5,6 +5,7 @@ defmodule AlertlyticsTest do
 
   import Mock
 
+  @tag :skip
   test "config service is available" do
     with_mock Slack.Bot,
       start_link: fn _slack, _state, _token -> {:ok, self()} end do
