@@ -90,8 +90,14 @@ defmodule Alertlytics.Workers.Alert do
 
     if Enum.count(attachments) > 0 do
       channel = Alertlytics.Workers.Config.channel()
-      Alertlytics.Services.SlackService.post_message("Service Status Update", attachments, channel)
+
+      Alertlytics.Services.SlackService.post_message(
+        "Service Status Update",
+        attachments,
+        channel
+      )
     end
+
     attachments
   end
 end

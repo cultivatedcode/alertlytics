@@ -25,23 +25,26 @@ defmodule AlertTest do
   end
 
   test "alert/1 when alert should occur on fixed" do
-    with_mock Alertlytics.Services.SlackService, [post_message: fn(_title, _attachments, _channel) -> nil end] do
-      alerts = Subject.alert([%{ service_config: %{ name: "test" }, new_is_live: true }])
+    with_mock Alertlytics.Services.SlackService,
+      post_message: fn _title, _attachments, _channel -> nil end do
+      alerts = Subject.alert([%{service_config: %{name: "test"}, new_is_live: true}])
       assert 1 == Enum.count(alerts)
-      assert ["#36a64f"] == Enum.map(alerts, fn(alert) -> alert[:color] end)
+      assert ["#36a64f"] == Enum.map(alerts, fn alert -> alert[:color] end)
     end
   end
 
   test "alert/1 when alert should occur on failed" do
-    with_mock Alertlytics.Services.SlackService, [post_message: fn(_title, _attachments, _channel) -> nil end] do
-      alerts = Subject.alert([%{ service_config: %{ name: "test" }, new_is_live: false }])
+    with_mock Alertlytics.Services.SlackService,
+      post_message: fn _title, _attachments, _channel -> nil end do
+      alerts = Subject.alert([%{service_config: %{name: "test"}, new_is_live: false}])
       assert 1 == Enum.count(alerts)
-      assert ["#f90c0c"] == Enum.map(alerts, fn(alert) -> alert[:color] end)
+      assert ["#f90c0c"] == Enum.map(alerts, fn alert -> alert[:color] end)
     end
   end
 
   test "alert/1 when alert should not occur" do
-    with_mock Alertlytics.Services.SlackService, [post_message: fn(_title, _attachments, _channel) -> nil end] do
+    with_mock Alertlytics.Services.SlackService,
+      post_message: fn _title, _attachments, _channel -> nil end do
       alerts = Subject.alert([])
       assert 0 == Enum.count(alerts)
     end
