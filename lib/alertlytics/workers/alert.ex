@@ -25,12 +25,42 @@ defmodule Alertlytics.Workers.Alert do
   # Server (Callbacks)
 
   def init(init_args) do
-    IO.puts(Enum.count(init_args))
     schedule_work()
     {:ok, init_args}
   end
 
   def handle_info(:work, state) do
+    alert(state)
+
+    schedule_work()
+
+    {:noreply, []}
+  end
+
+  def handle_info(_, state) do
+    {:ok, state}
+  end
+
+  defp schedule_work do
+    one_minute = 60_000
+    Process.send_after(self(), :work, one_minute)
+  end
+
+  def handle_cast({:add_alert, service_config, previous_is_live, new_is_live}, state) do
+    if previous_is_live != new_is_live && previous_is_live != nil do
+      service_state = %{
+        service_config: service_config,
+        new_is_live: new_is_live,
+        previous_is_live: previous_is_live
+      }
+
+      {:noreply, [service_state | state]}
+    else
+      {:noreply, state}
+    end
+  end
+
+  def alert(state) do
     attachments =
       Enum.map(state, fn service_detail ->
         string_state =
@@ -62,32 +92,6 @@ defmodule Alertlytics.Workers.Alert do
       channel = Alertlytics.Workers.Config.channel()
       Alertlytics.Services.SlackService.post_message("Service Status Update", attachments, channel)
     end
-
-    schedule_work()
-
-    {:noreply, []}
-  end
-
-  def handle_info(_, state) do
-    {:ok, state}
-  end
-
-  defp schedule_work do
-    one_minute = 60_000
-    Process.send_after(self(), :work, one_minute)
-  end
-
-  def handle_cast({:add_alert, service_config, previous_is_live, new_is_live}, state) do
-    if previous_is_live != new_is_live && previous_is_live != nil do
-      service_state = %{
-        service_config: service_config,
-        new_is_live: new_is_live,
-        previous_is_live: previous_is_live
-      }
-
-      {:noreply, [service_state | state]}
-    else
-      {:noreply, state}
-    end
+    attachments
   end
 end
