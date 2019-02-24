@@ -34,7 +34,7 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     url = state[:service_config]["health_check_url"]
     is_live_now = Alertlytics.Services.HttpService.check(url)
 
-    Alertlytics.Workers.Alert.optionally_send_alert(
+    Alertlytics.Workers.Alert.update_alert(
       state[:service_config],
       state[:is_live],
       is_live_now

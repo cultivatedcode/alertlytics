@@ -21,8 +21,6 @@ defmodule Alertlytics.Workers.Slack do
   def handle_event(message = %{type: "message"}, slack, state) do
     if Regex.run(~r/<@#{slack.me.id}>:?\sping/, message.text) do
       send_message("<@#{message.user}> pong", message.channel, slack)
-    else
-      send_message("Hello world", message.channel, slack)
     end
 
     {:ok, state}
