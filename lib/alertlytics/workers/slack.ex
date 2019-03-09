@@ -38,14 +38,13 @@ defmodule Alertlytics.Workers.Slack do
         end
 
       attachment =
-        [
+        Poison.encode!([
           %{
             color: color,
             title: "#{live_count} / #{all_services_count} healthy services",
             ts: DateTime.to_unix(DateTime.utc_now())
           }
-        ]
-        |> Poison.encode!()
+        ])
 
       Slack.Web.Chat.post_message(message.channel, "Status Report", %{
         attachments: attachment
