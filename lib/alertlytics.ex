@@ -33,6 +33,7 @@ defmodule Alertlytics do
       worker(Alertlytics.Workers.Config, [config_path]),
       worker(Alertlytics.Workers.Alert, []),
       worker(Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]),
+      worker(Alertlytics.MonitorRegistry, []),
       worker(Alertlytics.MonitorSupervisor, []),
       worker(Alertlytics.Workers.Bootstrap, [])
     ]

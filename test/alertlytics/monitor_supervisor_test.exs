@@ -1,6 +1,11 @@
 defmodule MonitorSupervisorTest do
   use ExUnit.Case
 
+  setup do
+    {:ok, pid} = Alertlytics.MonitorRegistry.start_link()
+    {:ok, registry: pid}
+  end
+
   test "should create http monitor" do
     {:ok, _} = Alertlytics.MonitorSupervisor.start_link()
 
