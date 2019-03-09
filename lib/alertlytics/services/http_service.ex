@@ -10,16 +10,16 @@ defmodule Alertlytics.Services.HttpService do
   Returns true if the url returns a status of 200.
   """
   def check(url) do
-    IO.puts("Checking status for '#{url}'")
     HTTPoison.start()
 
     is_live_now =
       case HTTPoison.get(url) do
         {:ok, %HTTPoison.Response{status_code: 200}} ->
-          IO.puts("SUCCESS!!!")
+          IO.puts(" - '#{url}' is live")
           true
 
         _ ->
+          IO.puts(" - '#{url}' is down")
           false
       end
 

@@ -38,7 +38,13 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   def init(service_config) do
     delay = service_config["test_interval_in_minutes"] * 60_000
-    IO.puts("- Checking every #{service_config["test_interval_in_minutes"]} minutes.")
+
+    IO.puts(
+      "- '#{state[:service_config]["name"]}' checking every #{
+        service_config["test_interval_in_minutes"]
+      } minutes."
+    )
+
     schedule_work(delay)
     {:ok, %{service_config: service_config, delay: delay, is_live: nil}}
   end
