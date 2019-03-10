@@ -46,7 +46,7 @@ defmodule AlertTest do
     with_mock Alertlytics.Services.SlackService,
       post_message: fn _title, _attachments, _channel -> nil end do
       alerts = Subject.alert([])
-      assert 0 == Enum.count(alerts)
+      assert Enum.empty?(alerts)
     end
   end
 
