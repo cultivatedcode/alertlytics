@@ -1,5 +1,6 @@
 defmodule Alertlytics.Workers.Slack do
   use Slack
+  require Logger
 
   @moduledoc """
   Documentation for Slack.
@@ -11,7 +12,7 @@ defmodule Alertlytics.Workers.Slack do
   """
   # Catch all message handler so we don't crash
   def handle_connect(slack, state) do
-    IO.puts("Connected as #{slack.me.name}")
+    Logger.info("Connected as #{slack.me.name}")
     {:ok, state}
   end
 

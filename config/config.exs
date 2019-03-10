@@ -4,6 +4,8 @@ config :remix,
   escript: true,
   silent: true
 
+config :logger, :console, format: "$time $metadata[$level] $levelpad$message\n"
+
 config :alertlytics, Alertlytics, config_path: System.get_env("CONFIG_PATH")
 config :alertlytics, Alertlytics.Workers.Slack, token: System.get_env("SLACK_TOKEN")
 config :slack, api_token: System.get_env("SLACK_TOKEN")

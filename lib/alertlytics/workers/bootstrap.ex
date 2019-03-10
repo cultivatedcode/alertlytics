@@ -1,5 +1,6 @@
 defmodule Alertlytics.Workers.Bootstrap do
   use GenServer
+  require Logger
 
   @moduledoc """
   Documentation for Bootstrap.
@@ -19,8 +20,8 @@ defmodule Alertlytics.Workers.Bootstrap do
 
   def init(init_arg) do
     services = Alertlytics.Workers.Config.services()
-    IO.puts("Initializing monitoring.")
-    IO.puts("------------------------")
+    Logger.info("Initializing monitoring.")
+    Logger.info("------------------------")
 
     Enum.each(services, fn service ->
       Alertlytics.MonitorSupervisor.add_monitor(service)

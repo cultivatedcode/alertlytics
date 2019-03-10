@@ -1,4 +1,6 @@
 defmodule Alertlytics.Services.HttpService do
+  require Logger
+
   @moduledoc """
   Documentation for HttpService.
   Checks if the given url returns status 200.
@@ -15,11 +17,11 @@ defmodule Alertlytics.Services.HttpService do
     is_live_now =
       case HTTPoison.get(url) do
         {:ok, %HTTPoison.Response{status_code: 200}} ->
-          IO.puts(" - '#{url}' is live")
+          Logger.info(" - '#{url}' is live")
           true
 
         _ ->
-          IO.puts(" - '#{url}' is down")
+          Logger.info(" - '#{url}' is down")
           false
       end
 
