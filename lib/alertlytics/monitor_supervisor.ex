@@ -1,5 +1,6 @@
 defmodule Alertlytics.MonitorSupervisor do
   use DynamicSupervisor
+  require Logger
 
   @moduledoc """
   Documentation for MonitorSupervisor.
@@ -17,7 +18,7 @@ defmodule Alertlytics.MonitorSupervisor do
     Add a service to be monitored.
   """
   def add_monitor(service_config) do
-    IO.puts("Adding #{service_config["name"]}")
+    Logger.info("-Adding '#{service_config["name"]}'")
     spec = {Alertlytics.Workers.HttpHealthCheck, service_config}
     DynamicSupervisor.start_child(__MODULE__, spec)
   end

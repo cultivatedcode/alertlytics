@@ -1,5 +1,6 @@
 defmodule Alertlytics do
   use Application
+  require Logger
 
   @moduledoc """
   Documentation for Alertlytics.
@@ -13,7 +14,7 @@ defmodule Alertlytics do
     import Supervisor.Spec, warn: false
 
     slack_token = Application.get_env(:alertlytics, Alertlytics.Workers.Slack)[:token]
-    IO.puts("token '#{slack_token}'")
+    Logger.debug("token '#{slack_token}'")
 
     config_path =
       case Application.get_env(:sitrep, Sitrep)[:config_path] do
@@ -27,7 +28,7 @@ defmodule Alertlytics do
           Application.get_env(:sitrep, Sitrep)[:config_path]
       end
 
-    IO.puts("config_path: '#{config_path}'")
+    Logger.info("config_path: '#{config_path}'")
 
     children = [
       worker(Alertlytics.Workers.Config, [config_path]),

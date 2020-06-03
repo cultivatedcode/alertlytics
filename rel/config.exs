@@ -50,4 +50,3 @@ release :alertlytics do
     :runtime_tools
   ]
 end
-

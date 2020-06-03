@@ -1,5 +1,6 @@
 defmodule Alertlytics.Workers.HttpHealthCheck do
   use GenServer
+  require Logger
 
   @moduledoc """
   Documentation for HttpHealthCheck.
@@ -19,7 +20,7 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     Starts the http health check server.
   """
   def start_link(service_config) do
-    IO.puts("Registering Http Health Check (#{service_config["health_check_url"]})")
+    Logger.info(" - Registering Http Health Check (#{service_config["health_check_url"]})")
 
     GenServer.start_link(__MODULE__, service_config,
       name: via_tuple(service_config["health_check_url"])
@@ -38,7 +39,11 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   def init(service_config) do
     delay = service_config["test_interval_in_minutes"] * 60_000
-    IO.puts("- Checking every #{service_config["test_interval_in_minutes"]} minutes.")
+
+    Logger.info(
+      "- '#{service_config["name"]}' checking every #{service_config["test_interval_in_minutes"]} minutes."
+    )
+
     schedule_work(delay)
     {:ok, %{service_config: service_config, delay: delay, is_live: nil}}
   end
