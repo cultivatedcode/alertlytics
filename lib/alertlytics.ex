@@ -36,6 +36,7 @@ defmodule Alertlytics do
       # {Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]},
       Alertlytics.MonitorRegistry,
       Alertlytics.MonitorSupervisor,
+      Alertlytics.ServiceStatus,
       Alertlytics.Workers.Bootstrap,
       HelloWeb.Telemetry,
       {Phoenix.PubSub, name: Hello.PubSub},

@@ -29,6 +29,7 @@ defmodule Alertlytics.Workers.Bootstrap do
 
     Enum.each(services, fn service ->
       Alertlytics.MonitorSupervisor.add_monitor(service)
+      Alertlytics.ServiceStatus.update(service["name"], false)
     end)
 
     {:ok, true}

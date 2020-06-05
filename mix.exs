@@ -42,9 +42,9 @@ defmodule Alertlytics.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:httpoison, "~> 0.13"},
+      {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:slack, "~> 0.14.0"},
+      {:slack, "~> 0.23.4"},
       {:remix, "~> 0.0.1", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
       {:distillery, "~> 2.0"},
@@ -54,7 +54,7 @@ defmodule Alertlytics.MixProject do
 
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"]
+      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       # "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       # "ecto.reset": ["ecto.drop", "ecto.setup"],
       # test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]

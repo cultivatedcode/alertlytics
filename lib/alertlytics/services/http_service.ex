@@ -20,6 +20,10 @@ defmodule Alertlytics.Services.HttpService do
           Logger.info(" - '#{url}' is live")
           true
 
+        {:error, %HTTPoison.Error{reason: reason}} ->
+          Logger.info(inspect(reason))
+          false
+
         _ ->
           Logger.info(" - '#{url}' is down")
           false

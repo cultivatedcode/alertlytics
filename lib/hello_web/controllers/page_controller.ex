@@ -3,8 +3,7 @@ defmodule HelloWeb.PageController do
   require Logger
 
   def index(conn, _params) do
-    services = Alertlytics.Workers.Config.services()
-    Logger.info("-Init #{Enum.count(services)}")
+    services = Alertlytics.ServiceStatus.all()
 
     conn
     |> Plug.Conn.assign(:status, "Operational")
