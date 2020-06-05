@@ -9,6 +9,10 @@ defmodule Alertlytics.Workers.Bootstrap do
 
   # Client
 
+  def child_spec(_) do
+    Supervisor.Spec.worker(__MODULE__, [])
+  end
+
   @doc """
     Starts the config server.
   """

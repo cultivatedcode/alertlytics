@@ -8,6 +8,10 @@ defmodule Alertlytics.Workers.Alert do
 
   # Client
 
+  def child_spec(_) do
+    Supervisor.Spec.worker(__MODULE__, [])
+  end
+
   @doc """
     Starts the alert server.
   """

@@ -23,6 +23,10 @@ defmodule Alertlytics.Workers.Config do
     end
   end
 
+  def child_spec(config_file_path) do
+    Supervisor.Spec.worker(__MODULE__, [config_file_path])
+  end
+
   @doc """
     Returns the slack channel to use for alerts.
   """

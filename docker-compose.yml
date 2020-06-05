@@ -8,8 +8,18 @@ services:
     build: "."
     env_file:
       - .env
+    ports:
+      - 4000:4000
     stdin_open: true
     tty: true
+  postgres:
+    container_name: postgres
+    image: postgres:9.6
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
   web:
     container_name: web
     image: kitematic/hello-world-nginx

@@ -8,6 +8,10 @@ defmodule Alertlytics.MonitorRegistry do
 
   # API
 
+  def child_spec(_) do
+    Supervisor.Spec.worker(__MODULE__, [])
+  end
+
   @doc """
     Starts the registry.
   """

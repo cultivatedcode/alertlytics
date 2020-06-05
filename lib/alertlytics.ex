@@ -31,15 +31,25 @@ defmodule Alertlytics do
     Logger.info("config_path: '#{config_path}'")
 
     children = [
-      worker(Alertlytics.Workers.Config, [config_path]),
-      worker(Alertlytics.Workers.Alert, []),
-      worker(Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]),
-      worker(Alertlytics.MonitorRegistry, []),
-      worker(Alertlytics.MonitorSupervisor, []),
-      worker(Alertlytics.Workers.Bootstrap, [])
+      {Alertlytics.Workers.Config, config_path},
+      Alertlytics.Workers.Alert,
+      # {Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]},
+      Alertlytics.MonitorRegistry,
+      Alertlytics.MonitorSupervisor,
+      Alertlytics.Workers.Bootstrap,
+      HelloWeb.Telemetry,
+      {Phoenix.PubSub, name: Hello.PubSub},
+      HelloWeb.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: Alertlytics.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    HelloWeb.Endpoint.config_change(changed, removed)
+    :ok
   end
 end
