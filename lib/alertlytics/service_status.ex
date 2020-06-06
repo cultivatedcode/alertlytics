@@ -3,6 +3,8 @@ defmodule Alertlytics.ServiceStatus do
 
   # API
 
+  @topic inspect(__MODULE__)
+
   def child_spec(_) do
     Supervisor.Spec.worker(__MODULE__, [])
   end
@@ -23,6 +25,14 @@ defmodule Alertlytics.ServiceStatus do
     GenServer.call(:service_status, {:update, name, is_live})
   end
 
+  def subscribe do
+    Phoenix.PubSub.subscribe(Alertlytics.PubSub, @topic)
+  end
+
+  # def subscribe(name) do
+  #   Phoenix.PubSub.subscribe(Alertlytics.PubSub, @topic <> "#{name}")
+  # end
+
   # SERVER
 
   def init(_) do
@@ -41,6 +51,7 @@ defmodule Alertlytics.ServiceStatus do
   end
 
   def handle_call({:update, name, is_live}, _from, state) do
+    notify_subscribers([:update])
     case Map.get(state, name) do
       nil ->
         {:reply, :yes, Map.put(state, name, %{ is_live: is_live, last_checked: DateTime.utc_now() } )}
@@ -48,5 +59,10 @@ defmodule Alertlytics.ServiceStatus do
       _ ->
         {:reply, :yes, Map.put(state, name, %{ is_live: is_live, last_checked: DateTime.utc_now() } )}
     end
+  end
+
+  defp notify_subscribers(event) do
+    Phoenix.PubSub.broadcast(Alertlytics.PubSub, @topic, {__MODULE__, event})
+    {:ok, event}
   end
 end

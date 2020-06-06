@@ -39,7 +39,7 @@ defmodule Alertlytics do
       Alertlytics.ServiceStatus,
       Alertlytics.Workers.Bootstrap,
       HelloWeb.Telemetry,
-      {Phoenix.PubSub, name: Hello.PubSub},
+      {Phoenix.PubSub, name: Alertlytics.PubSub},
       HelloWeb.Endpoint
     ]
 

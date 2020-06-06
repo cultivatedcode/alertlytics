@@ -35,6 +35,7 @@ defmodule Alertlytics.MixProject do
     [
       {:phoenix, "~> 1.5.3"},
       {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_view, "~> 0.13.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.2.0"},
       {:telemetry_metrics, "~> 0.4"},
@@ -48,7 +49,8 @@ defmodule Alertlytics.MixProject do
       {:remix, "~> 0.0.1", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
       {:distillery, "~> 2.0"},
-      {:mock, "~> 0.3.0", only: :test}
+      {:mock, "~> 0.3.0", only: :test},
+      {:datex, "~> 1.0.0"}
     ]
   end
 

@@ -22,7 +22,7 @@ defmodule Alertlytics.Workers.Bootstrap do
 
   # Server (Callbacks)
 
-  def init(init_arg) do
+  def init(_init_arg) do
     services = Alertlytics.Workers.Config.services()
     Logger.info("Initializing monitoring.")
     Logger.info("------------------------")

@@ -37,6 +37,7 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   # Server (Callbacks)
 
+
   def init(service_config) do
     delay = service_config["test_interval_in_minutes"] * 60_000
 

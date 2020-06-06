@@ -1,7 +1,7 @@
 <section class="phx-hero">
   <h1>Services</h1>
 </section>
-
+<%= button("Refresh", to: "/refresh", method: :get, class: "btn") %>
 <table>
   <tr>
     <th>Service</th>
@@ -11,7 +11,7 @@
   <%= Enum.map(@services, fn(service) -> %>
   <tr>
     <td><%= service[:name] %></td>
-    <td><%= service[:last_checked] %></td>
+    <td><%= Datex.Time.compare(service[:last_checked], DateTime.utc_now) %></td>
     <td><%= service[:is_live] %></td>
   </tr>
   <% end) %>

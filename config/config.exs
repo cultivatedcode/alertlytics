@@ -18,7 +18,7 @@ config :alertlytics, HelloWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "z4/TXUVNyBQthk46W8TXKZJJ9uIso602EGQNkJIKBANtTq12K/ZYxfIZp87IVPY/",
   render_errors: [view: HelloWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Hello.PubSub,
+  pubsub_server: Alertlytics.PubSub,
   live_view: [signing_salt: "UtkuunqQ"]
 
 # Use Jason for JSON parsing in Phoenix
