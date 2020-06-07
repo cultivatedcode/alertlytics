@@ -1,4 +1,4 @@
-defmodule HelloWeb.ClockLive do
+  defmodule HelloWeb.ClockLive do
   use HelloWeb, :live_view
 
   def render(assigns) do

@@ -4,21 +4,13 @@ defmodule HelloWeb.StatusLive do
 
   alias Phoenix.LiveView.Socket
 
-  # def render(assigns) do
-  #   ~L"""
-  #   <h2>Show User</h2>
-  #   <%= @data %>
-  #   """
-  # end
-
   def mount(_params, _session, socket) do
-    # if connected?(socket), do:
+    # if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
     Alertlytics.ServiceStatus.subscribe()
     {:ok, fetch(socket)}
   end
 
   def handle_info({Alertlytics.ServiceStatus, _}, socket) do
-    Logger.info("UPDATING UI")
     {:noreply, fetch(socket)}
   end
 
