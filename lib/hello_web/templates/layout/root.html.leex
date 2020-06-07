@@ -11,19 +11,6 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <div class="ui inverted vertical masthead center aligned segment">
-
-      <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
-          <div class="item">
-            <i class="bullhorn icon"></i> Alertlytics
-          </div>
-          <div class="right item">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">&nbsp;</div>
     <%= @inner_content %>
   </body>
 </html>

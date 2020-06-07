@@ -1,11 +1,20 @@
 <main role="main" class="container">
-  <p class="alert alert-info" role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
-
-  <p class="alert alert-danger" role="alert"
-    phx-click="lv:clear-flash"
-    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
-
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <div class="item">
+          <i class="bullhorn icon"></i> Alertlytics
+        </div>
+        <div class="right item">
+          <%= if map_size(@flash) > 0 do %>
+            <div class="ui green label alert alert-info" role="alert"
+              phx-click="lv:clear-flash"
+              phx-value-key="info"><%= live_flash(@flash, :info) %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">&nbsp;</div>
   <%= @inner_content %>
 </main>

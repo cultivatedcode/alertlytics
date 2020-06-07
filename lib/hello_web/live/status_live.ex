@@ -11,7 +11,10 @@ defmodule HelloWeb.StatusLive do
   end
 
   def handle_info({Alertlytics.ServiceStatus, _}, socket) do
-    {:noreply, fetch(socket)}
+    { :noreply,
+      socket
+      |> put_flash(:info, "Updated")
+      |> fetch()}
   end
 
   defp fetch(socket) do
