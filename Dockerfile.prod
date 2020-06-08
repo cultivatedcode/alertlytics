@@ -12,6 +12,7 @@ RUN mix local.hex --force && \
 ENV MIX_ENV=prod
 
 RUN mix deps.get --force && \
+    cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode production && \
     mix deps.compile
 
 RUN mix release
@@ -32,4 +33,4 @@ ENV REPLACE_OS_VARS=true
 
 #Set default entrypoint and command
 ENTRYPOINT ["/app/bin/alertlytics"]
-CMD ["foreground"]
+CMD ["start"]
