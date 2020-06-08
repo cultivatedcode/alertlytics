@@ -1,9 +1,5 @@
 use Mix.Config
 
-config :remix,
-  escript: true,
-  silent: true
-
 config :logger,
        :console,
        format: "$time $metadata[$level] $levelpad$message\n",
@@ -14,10 +10,10 @@ config :alertlytics, Alertlytics.Workers.Slack, token: System.get_env("SLACK_TOK
 config :slack, api_token: System.get_env("SLACK_TOKEN")
 
 # Configures the endpoint
-config :alertlytics, HelloWeb.Endpoint,
+config :alertlytics, AlertlyticsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "z4/TXUVNyBQthk46W8TXKZJJ9uIso602EGQNkJIKBANtTq12K/ZYxfIZp87IVPY/",
-  render_errors: [view: HelloWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [view: AlertlyticsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Alertlytics.PubSub,
   live_view: [signing_salt: "UtkuunqQ"]
 

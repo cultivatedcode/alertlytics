@@ -37,7 +37,6 @@ defmodule Alertlytics.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_view, "~> 0.13.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.2.0"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
@@ -48,7 +47,6 @@ defmodule Alertlytics.MixProject do
       {:slack, "~> 0.23.4"},
       {:remix, "~> 0.0.1", only: :dev},
       {:excoveralls, "~> 0.10", only: :test},
-      {:distillery, "~> 2.0"},
       {:mock, "~> 0.3.0", only: :test},
       {:datex, "~> 1.0.0"}
     ]

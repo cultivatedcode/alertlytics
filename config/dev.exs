@@ -1,12 +1,16 @@
 use Mix.Config
 
+config :remix,
+  escript: true,
+  silent: true
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :alertlytics, HelloWeb.Endpoint,
+config :alertlytics, AlertlyticsWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -46,7 +50,7 @@ config :alertlytics, HelloWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :alertlytics, HelloWeb.Endpoint,
+config :alertlytics, AlertlyticsWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",

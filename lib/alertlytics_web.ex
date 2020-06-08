@@ -1,12 +1,12 @@
-defmodule HelloWeb do
+defmodule AlertlyticsWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use HelloWeb, :controller
-      use HelloWeb, :view
+      use AlertlyticsWeb, :controller
+      use AlertlyticsWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,19 +19,19 @@ defmodule HelloWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: HelloWeb
+      use Phoenix.Controller, namespace: AlertlyticsWeb
 
       import Plug.Conn
-      import HelloWeb.Gettext
-      alias HelloWeb.Router.Helpers, as: Routes
+      import AlertlyticsWeb.Gettext
+      alias AlertlyticsWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/hello_web/templates",
-        namespace: HelloWeb
+        root: "lib/alertlytics_web/templates",
+        namespace: AlertlyticsWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +45,7 @@ defmodule HelloWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {HelloWeb.LayoutView, "live.html"}
+        layout: {AlertlyticsWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -72,7 +72,7 @@ defmodule HelloWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HelloWeb.Gettext
+      import AlertlyticsWeb.Gettext
     end
   end
 
@@ -87,9 +87,9 @@ defmodule HelloWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import HelloWeb.ErrorHelpers
-      import HelloWeb.Gettext
-      alias HelloWeb.Router.Helpers, as: Routes
+      import AlertlyticsWeb.ErrorHelpers
+      import AlertlyticsWeb.Gettext
+      alias AlertlyticsWeb.Router.Helpers, as: Routes
     end
   end
 

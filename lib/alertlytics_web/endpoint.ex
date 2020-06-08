@@ -1,5 +1,6 @@
-defmodule HelloWeb.Endpoint do
+defmodule AlertlyticsWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :alertlytics
+  require Logger
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,7 +11,7 @@ defmodule HelloWeb.Endpoint do
     signing_salt: "yMx+ZREs"
   ]
 
-  socket("/socket", HelloWeb.UserSocket,
+  socket("/socket", AlertlyticsWeb.UserSocket,
     websocket: true,
     longpoll: false
   )
@@ -30,17 +31,12 @@ defmodule HelloWeb.Endpoint do
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
-  if code_reloading? do
+  if code_reloading?  do
+    Logger.info("Initializing live reloading")
     socket("/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket)
     plug(Phoenix.LiveReloader)
     plug(Phoenix.CodeReloader)
-    # plug Phoenix.Ecto.CheckRepoStatus, otp_app: :alertlytics
   end
-
-  plug(Phoenix.LiveDashboard.RequestLogger,
-    param_key: "request_logger",
-    cookie_key: "request_logger"
-  )
 
   plug(Plug.RequestId)
   plug(Plug.Telemetry, event_prefix: [:phoenix, :endpoint])
@@ -54,5 +50,5 @@ defmodule HelloWeb.Endpoint do
   plug(Plug.MethodOverride)
   plug(Plug.Head)
   plug(Plug.Session, @session_options)
-  plug(HelloWeb.Router)
+  plug(AlertlyticsWeb.Router)
 end

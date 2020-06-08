@@ -1,5 +1,5 @@
-defmodule HelloWeb.StatusLive do
-  use HelloWeb, :live_view
+defmodule AlertlyticsWeb.StatusLive do
+  use AlertlyticsWeb, :live_view
   require Logger
 
   alias Phoenix.LiveView.Socket
