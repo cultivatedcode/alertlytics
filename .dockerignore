@@ -1,0 +1,5 @@
+assets/node_modules
+_build
+.circleci
+.elixir_ls
+deps

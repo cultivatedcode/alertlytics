@@ -5,6 +5,8 @@ WORKDIR /app
 COPY . /app
 RUN rm -rf /app/_build
 
+RUN apk add --update nodejs nodejs-npm
+
 RUN apk add --no-cache bash
 RUN mix local.hex --force && \
     mix local.rebar --force
@@ -12,8 +14,8 @@ RUN mix local.hex --force && \
 ENV MIX_ENV=prod
 
 RUN mix deps.get --force && \
-    cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode production && \
-    mix deps.compile
+    cd /app/assets && npm install && node node_modules/webpack/bin/webpack.js --mode production && \
+    cd /app && mix deps.compile
 
 RUN mix release
 
