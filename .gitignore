@@ -9,5 +9,7 @@ erl_crash.dump
 /config/*.secret.exs
 .env
 /rel
+/tmp
+node_modules
 prod-config.json
 start.sh

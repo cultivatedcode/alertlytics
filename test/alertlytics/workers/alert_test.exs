@@ -6,8 +6,8 @@ defmodule AlertTest do
   import Mock
 
   setup do
-    Alertlytics.Workers.Config.start_link("test/fixtures/config.json")
-    Subject.start_link()
+    Alertlytics.Workers.Config.start_link("test/fixtures/config.json", :test_config_for_alert)
+    Subject.start_link(:test_alert)
 
     service_config = %{
       "health_check_url" => "https://www.cultivatedcode.com",

@@ -17,7 +17,7 @@ defmodule Alertlytics do
     Logger.debug("token '#{slack_token}'")
 
     config_path =
-      case Application.get_env(:sitrep, Sitrep)[:config_path] do
+      case Application.get_env(:alertlytics, Alertlytics)[:config_path] do
         nil ->
           "/etc/alertlytics/config.json"
 
@@ -25,21 +25,37 @@ defmodule Alertlytics do
           "/etc/alertlytics/config.json"
 
         _ ->
-          Application.get_env(:sitrep, Sitrep)[:config_path]
+          Application.get_env(:alertlytics, Alertlytics)[:config_path]
       end
 
     Logger.info("config_path: '#{config_path}'")
 
     children = [
-      worker(Alertlytics.Workers.Config, [config_path]),
-      worker(Alertlytics.Workers.Alert, []),
-      worker(Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]),
-      worker(Alertlytics.MonitorRegistry, []),
-      worker(Alertlytics.MonitorSupervisor, []),
-      worker(Alertlytics.Workers.Bootstrap, [])
+      AlertlyticsWeb.Telemetry,
+      {Phoenix.PubSub, name: Alertlytics.PubSub},
+      {Alertlytics.Workers.Config, config_path},
+      Alertlytics.Workers.Alert,
+      Alertlytics.MonitorRegistry,
+      Alertlytics.MonitorSupervisor,
+      Alertlytics.ServiceStatus,
+      Alertlytics.Workers.Bootstrap,
+      AlertlyticsWeb.Endpoint
     ]
+
+    if slack_token != "" && slack_token != nil do
+      children = children ++ [{Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]}]
+    else
+      Logger.info("SLACK_TOKEN missing.  Skipping SlackBot initialization.")
+    end
 
     opts = [strategy: :one_for_one, name: Alertlytics.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    AlertlyticsWeb.Endpoint.config_change(changed, removed)
+    :ok
   end
 end

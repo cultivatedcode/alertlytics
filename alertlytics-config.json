@@ -1,6 +1,6 @@
 {
    "channel": "#commits",
-   "services": 
+   "services":
    [{
       "type": "web",
       "name": "marketing-site",

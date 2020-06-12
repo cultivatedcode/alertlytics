@@ -27,6 +27,9 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     )
   end
 
+  @doc """
+    Check if the service is live.
+  """
   def is_live(monitor_name) do
     GenServer.call(via_tuple(monitor_name), :is_live)
   end
@@ -51,6 +54,8 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
   def handle_info(:work, state) do
     url = state[:service_config]["health_check_url"]
     is_live_now = Alertlytics.Services.HttpService.check(url)
+
+    Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
 
     Alertlytics.Workers.Alert.update_alert(
       state[:service_config],

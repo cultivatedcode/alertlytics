@@ -9,10 +9,17 @@ defmodule Alertlytics.MonitorRegistry do
   # API
 
   @doc """
+    Child spec for this module.
+  """
+  def child_spec(_) do
+    Supervisor.Spec.worker(__MODULE__, [])
+  end
+
+  @doc """
     Starts the registry.
   """
-  def start_link do
-    GenServer.start_link(__MODULE__, nil, name: :registry)
+  def start_link(name \\ :registry) do
+    GenServer.start_link(__MODULE__, nil, name: name)
   end
 
   @doc """
@@ -77,7 +84,7 @@ defmodule Alertlytics.MonitorRegistry do
 
   def remove_pid(state, pid_to_remove) do
     remove = fn {_key, pid} -> pid != pid_to_remove end
-    Enum.into(Enum.filter(state, remove))
+    Enum.filter(state, remove) |> Enum.into(%{})
   end
 
   def handle_cast({:unregister_name, monitor_name}, state) do

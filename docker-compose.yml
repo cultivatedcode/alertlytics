@@ -8,6 +8,8 @@ services:
     build: "."
     env_file:
       - .env
+    ports:
+      - 4000:4000
     stdin_open: true
     tty: true
   web:

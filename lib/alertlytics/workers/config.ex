@@ -10,13 +10,20 @@ defmodule Alertlytics.Workers.Config do
   # Client
 
   @doc """
+    Child spec for this module.
+  """
+  def child_spec(config_file_path) do
+    Supervisor.Spec.worker(__MODULE__, [config_file_path])
+  end
+
+  @doc """
     Starts the config server.
   """
-  def start_link(config_file_path) do
+  def start_link(config_file_path, name \\ __MODULE__) do
     Logger.info("Loading config file '#{config_file_path}'.")
 
     if File.exists?(config_file_path) do
-      GenServer.start_link(__MODULE__, [config_file_path], name: __MODULE__)
+      GenServer.start_link(__MODULE__, [config_file_path], name: name)
     else
       {:ok, working_dir} = File.cwd()
       raise "Error #{config_file_path} not found in #{working_dir}"

@@ -1,10 +1,10 @@
 {
    "channel": "#alerts",
-   "services": 
+   "services":
    [{
       "type": "web",
       "name": "marketing-site",
-      "health_check_url": "https://www.cultivatedcode.com",
+      "health_check_url": "http://www.cultivatedcode.com",
       "test_interval_in_minutes": 5
    }]
 }

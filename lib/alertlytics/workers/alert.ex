@@ -9,10 +9,17 @@ defmodule Alertlytics.Workers.Alert do
   # Client
 
   @doc """
+    Child spec for this module.
+  """
+  def child_spec(_) do
+    Supervisor.Spec.worker(__MODULE__, [])
+  end
+
+  @doc """
     Starts the alert server.
   """
-  def start_link do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(name \\ __MODULE__) do
+    GenServer.start_link(__MODULE__, [], name: name)
   end
 
   @doc """

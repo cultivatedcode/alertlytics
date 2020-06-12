@@ -4,9 +4,9 @@ cache:
   - deps
   - _build
 elixir:
-  - 1.8.0
+  - 1.10.0
 otp_release:
-  - 21.0
+  - 22.0
 env:
   global:
     - MIX_ENV=test
@@ -18,5 +18,5 @@ install:
   - mix deps.get
 script:
   - "mix format --dry-run --check-formatted"
-  - "mix test --exclude pending --trace --no-start"
-  - "mix coveralls.travis --no-start"
+  - "mix test --exclude pending --trace"
+  - "mix coveralls.travis"

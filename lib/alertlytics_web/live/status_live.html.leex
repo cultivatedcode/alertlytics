@@ -1,0 +1,20 @@
+<div class="ui container">
+  <h3 class="ui header">Services</h3>
+  <div class="ui stackable two column grid">
+    <%= Enum.map(@data, fn(service) -> %>
+    <div class="column">
+      <div class="ui fluid card">
+        <div class="content">
+          <%= if (service[:is_live]) do %>
+            <i class="right floated big green check circle icon"></i>
+          <% else %>
+            <i class="right floated big red times circle icon"></i>
+          <% end %>
+          <div class="header"><%= service[:name] %></div>
+          <div class="meta"><%= service[:last_checked] %></div>
+        </div>
+      </div>
+    </div>
+    <% end) %>
+  </div>
+</div>

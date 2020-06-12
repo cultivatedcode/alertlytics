@@ -4,7 +4,7 @@ defmodule HttpHealthCheckTest do
   doctest Alertlytics.Workers.HttpHealthCheck
 
   setup do
-    {:ok, pid} = Alertlytics.MonitorRegistry.start_link()
+    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_registry_for_health_check)
     {:ok, registry: pid}
   end
 
@@ -38,7 +38,7 @@ defmodule HttpHealthCheckTest do
 
   defp service_config do
     %{
-      "health_check_url" => "https://www.cultivatedcode.com",
+      "health_check_url" => "https://www.google.com",
       "name" => "marketing-site",
       "type" => "web",
       "test_interval_in_minutes" => 5
