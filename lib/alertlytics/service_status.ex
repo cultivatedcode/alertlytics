@@ -9,8 +9,8 @@ defmodule Alertlytics.ServiceStatus do
     Supervisor.Spec.worker(__MODULE__, [])
   end
 
-  def start_link do
-    GenServer.start_link(__MODULE__, nil, name: :service_status)
+  def start_link(name \\ :service_status) do
+    GenServer.start_link(__MODULE__, nil, name: name)
   end
 
   def all() do
@@ -40,9 +40,11 @@ defmodule Alertlytics.ServiceStatus do
   end
 
   def handle_call({:all}, _from, state) do
-    services = Enum.map  state,  fn {key, value} ->
-      Map.merge(%{ name: key }, value)
-    end
+    services =
+      Enum.map(state, fn {key, value} ->
+        Map.merge(%{name: key}, value)
+      end)
+
     {:reply, services, state}
   end
 
@@ -52,12 +54,15 @@ defmodule Alertlytics.ServiceStatus do
 
   def handle_call({:update, name, is_live}, _from, state) do
     notify_subscribers([:update])
+
     case Map.get(state, name) do
       nil ->
-        {:reply, :yes, Map.put(state, name, %{ is_live: is_live, last_checked: DateTime.utc_now() } )}
+        {:reply, :yes,
+         Map.put(state, name, %{is_live: is_live, last_checked: DateTime.utc_now()})}
 
       _ ->
-        {:reply, :yes, Map.put(state, name, %{ is_live: is_live, last_checked: DateTime.utc_now() } )}
+        {:reply, :yes,
+         Map.put(state, name, %{is_live: is_live, last_checked: DateTime.utc_now()})}
     end
   end
 

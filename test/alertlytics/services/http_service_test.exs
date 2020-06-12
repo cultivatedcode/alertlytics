@@ -8,6 +8,6 @@ defmodule HttpServiceTest do
   end
 
   test "bad url" do
-    assert false == Subject.check("http://www.cultivatedcode.com")
+    assert false == Subject.check("https://incorrect.cultivatedcode.com")
   end
 end

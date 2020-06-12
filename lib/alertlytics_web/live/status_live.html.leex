@@ -11,7 +11,7 @@
             <i class="right floated big red times circle icon"></i>
           <% end %>
           <div class="header"><%= service[:name] %></div>
-          <div class="meta"><%= Datex.Time.compare(service[:last_checked], DateTime.utc_now) %></div>
+          <div class="meta"><%= service[:last_checked] %></div>
         </div>
       </div>
     </div>

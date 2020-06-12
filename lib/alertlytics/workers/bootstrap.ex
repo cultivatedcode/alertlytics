@@ -16,8 +16,8 @@ defmodule Alertlytics.Workers.Bootstrap do
   @doc """
     Starts the config server.
   """
-  def start_link do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(name \\ __MODULE__) do
+    GenServer.start_link(__MODULE__, [], name: name)
   end
 
   # Server (Callbacks)

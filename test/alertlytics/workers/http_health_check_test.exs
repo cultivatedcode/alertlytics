@@ -4,7 +4,7 @@ defmodule HttpHealthCheckTest do
   doctest Alertlytics.Workers.HttpHealthCheck
 
   setup do
-    {:ok, pid} = Alertlytics.MonitorRegistry.start_link()
+    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_registry)
     {:ok, registry: pid}
   end
 

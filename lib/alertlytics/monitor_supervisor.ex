@@ -14,8 +14,8 @@ defmodule Alertlytics.MonitorSupervisor do
   @doc """
     Starts the supervisor.
   """
-  def start_link do
-    DynamicSupervisor.start_link(__MODULE__, :ok, name: __MODULE__)
+  def start_link(name \\ __MODULE__) do
+    DynamicSupervisor.start_link(__MODULE__, :ok, name: name)
   end
 
   @doc """

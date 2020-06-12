@@ -17,7 +17,7 @@ defmodule Alertlytics do
     Logger.debug("token '#{slack_token}'")
 
     config_path =
-      case Application.get_env(:sitrep, Sitrep)[:config_path] do
+      case Application.get_env(:alertlytics, Alertlytics)[:config_path] do
         nil ->
           "/etc/alertlytics/config.json"
 
@@ -25,7 +25,7 @@ defmodule Alertlytics do
           "/etc/alertlytics/config.json"
 
         _ ->
-          Application.get_env(:sitrep, Sitrep)[:config_path]
+          Application.get_env(:alertlytics, Alertlytics)[:config_path]
       end
 
     Logger.info("config_path: '#{config_path}'")

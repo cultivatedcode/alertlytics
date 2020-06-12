@@ -5,7 +5,7 @@ defmodule AlertlyticsWeb.Router do
     plug(:accepts, ["html"])
     plug(:fetch_session)
     plug(:fetch_live_flash)
-    plug :put_root_layout, {AlertlyticsWeb.LayoutView, :root}
+    plug(:put_root_layout, {AlertlyticsWeb.LayoutView, :root})
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
   end
@@ -17,6 +17,6 @@ defmodule AlertlyticsWeb.Router do
   scope "/", AlertlyticsWeb do
     pipe_through(:browser)
 
-    live "/", StatusLive, :index
+    live("/", StatusLive, :index)
   end
 end

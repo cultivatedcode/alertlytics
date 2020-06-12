@@ -37,7 +37,6 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   # Server (Callbacks)
 
-
   def init(service_config) do
     delay = service_config["test_interval_in_minutes"] * 60_000
 
@@ -54,6 +53,7 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     is_live_now = Alertlytics.Services.HttpService.check(url)
 
     Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
+
     Alertlytics.Workers.Alert.update_alert(
       state[:service_config],
       state[:is_live],

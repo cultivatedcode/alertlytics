@@ -1,4 +1,10 @@
-# Alertlytics [![Build Status](https://travis-ci.org/cultivatedcode/alertlytics.svg?branch=master)](https://travis-ci.org/cultivatedcode/alertlytics) [![Coverage Status](https://coveralls.io/repos/github/cultivatedcode/alertlytics/badge.svg?branch=master)](https://coveralls.io/github/cultivatedcode/alertlytics?branch=master) [![Ebert](https://ebertapp.io/github/cultivatedcode/alertlytics.svg)](https://ebertapp.io/github/cultivatedcode/alertlytics)
+# Alertlytics
+
+[![Build Status](https://travis-ci.org/cultivatedcode/alertlytics.svg?branch=master)](https://travis-ci.org/cultivatedcode/alertlytics)
+[![Coverage Status](https://coveralls.io/repos/github/cultivatedcode/alertlytics/badge.svg?branch=master)](https://coveralls.io/github/cultivatedcode/alertlytics?branch=master)
+[![SourceLevel](https://app.sourcelevel.io/github/cultivatedcode/alertlytics.svg)](https://app.sourcelevel.io/github/cultivatedcode/alertlytics)
+[![Docker Build](https://img.shields.io/docker/cloud/build/cultivatedcode/alertlytics.svg)](https://hub.docker.com/repository/docker/cultivatedcode/alertlytics)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cultivatedcode/alertlytics/blob/master/LICENSE)
 
 ## Getting started
 
@@ -28,7 +34,7 @@ Alertlytics works with a json config file that defines the end points you would 
 
 In your browser you can navigate to `http://localhost` to view the status of all your services.  The dashboard live reloads as services are updated behind the scenes.
 
-[TBD: Screenshot]
+![Status Dashboard](docs/images/status-dashboard.png)
 
 ## Production Monitoring
 

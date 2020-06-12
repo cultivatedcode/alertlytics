@@ -15,8 +15,8 @@ defmodule Alertlytics.MonitorRegistry do
   @doc """
     Starts the registry.
   """
-  def start_link do
-    GenServer.start_link(__MODULE__, nil, name: :registry)
+  def start_link(name \\ :registry) do
+    GenServer.start_link(__MODULE__, nil, name: name)
   end
 
   @doc """
