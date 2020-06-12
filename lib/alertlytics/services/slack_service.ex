@@ -4,6 +4,9 @@ defmodule Alertlytics.Services.SlackService do
   Handles slack interactions.
   """
 
+  @doc """
+  Posts a message to Slack.
+  """
   def post_message(text, attachments, channel) do
     if Enum.count(attachments) > 0 do
       attachments_json = Poison.encode!(attachments)

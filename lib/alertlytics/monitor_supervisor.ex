@@ -7,6 +7,9 @@ defmodule Alertlytics.MonitorSupervisor do
   The supervisor of all monitoring processes.  These are spawned based on the config passed in to the application.
   """
 
+  @doc """
+    Child spec for this module.
+  """
   def child_spec(_) do
     Supervisor.Spec.worker(__MODULE__, [])
   end

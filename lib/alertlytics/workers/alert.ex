@@ -8,6 +8,9 @@ defmodule Alertlytics.Workers.Alert do
 
   # Client
 
+  @doc """
+    Child spec for this module.
+  """
   def child_spec(_) do
     Supervisor.Spec.worker(__MODULE__, [])
   end

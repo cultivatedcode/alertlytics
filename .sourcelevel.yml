@@ -21,8 +21,8 @@ engines:
   remark-lint:
     enabled: true
 exclude_paths:
-- config/**/*
-- test/**/*
-- assets/**/*
-- priv/**/*
+- config
+- test
+- assets
+- priv
 

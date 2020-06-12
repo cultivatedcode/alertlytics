@@ -27,6 +27,9 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     )
   end
 
+  @doc """
+    Check if the service is live.
+  """
   def is_live(monitor_name) do
     GenServer.call(via_tuple(monitor_name), :is_live)
   end
