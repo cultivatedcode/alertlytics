@@ -38,7 +38,7 @@ defmodule HttpHealthCheckTest do
 
   defp service_config do
     %{
-      "health_check_url" => "https://www.cultivatedcode.com",
+      "health_check_url" => "https://www.google.com",
       "name" => "marketing-site",
       "type" => "web",
       "test_interval_in_minutes" => 5
