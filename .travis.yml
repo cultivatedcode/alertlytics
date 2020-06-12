@@ -18,5 +18,5 @@ install:
   - mix deps.get
 script:
   - "mix format --dry-run --check-formatted"
-  - "mix test --exclude pending --trace --no-start"
-  - "mix coveralls.travis --no-start"
+  - "mix test --exclude pending --trace"
+  - "mix coveralls.travis
