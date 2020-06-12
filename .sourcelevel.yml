@@ -13,11 +13,11 @@ engines:
   fixme:
     enabled: true
   eslint:
-    enabled: true
+    enabled: false
   csslint:
-    enabled: true
+    enabled: false
   sass-lint:
-    enabled: true
+    enabled: false
   remark-lint:
     enabled: true
 exclude_paths:

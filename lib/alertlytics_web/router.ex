@@ -1,6 +1,10 @@
 defmodule AlertlyticsWeb.Router do
   use AlertlyticsWeb, :router
 
+  @moduledoc """
+  Documentation for Router.
+  """
+
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
