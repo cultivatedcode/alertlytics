@@ -2,7 +2,7 @@ defmodule Alertlytics.MonitorRegistryTest do
   use ExUnit.Case, async: true
 
   setup do
-    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_registry)
+    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_monitor_registry)
     {:ok, registry: pid}
   end
 
