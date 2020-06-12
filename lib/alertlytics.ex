@@ -35,13 +35,18 @@ defmodule Alertlytics do
       {Phoenix.PubSub, name: Alertlytics.PubSub},
       {Alertlytics.Workers.Config, config_path},
       Alertlytics.Workers.Alert,
-      # {Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]},
       Alertlytics.MonitorRegistry,
       Alertlytics.MonitorSupervisor,
       Alertlytics.ServiceStatus,
       Alertlytics.Workers.Bootstrap,
       AlertlyticsWeb.Endpoint
     ]
+
+    if slack_token != "" && slack_token != nil do
+      children = children ++ [{Slack.Bot, [Alertlytics.Workers.Slack, [], slack_token]}]
+    else
+      Logger.info("SLACK_TOKEN missing.  Skipping SlackBot initialization.")
+    end
 
     opts = [strategy: :one_for_one, name: Alertlytics.Supervisor]
     Supervisor.start_link(children, opts)

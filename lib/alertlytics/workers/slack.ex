@@ -12,7 +12,7 @@ defmodule Alertlytics.Workers.Slack do
   """
   # Catch all message handler so we don't crash
   def handle_connect(slack, state) do
-    Logger.info("Connected as #{slack.me.name}")
+    Logger.info("SlackBot connected as #{slack.me.name}")
     {:ok, state}
   end
 

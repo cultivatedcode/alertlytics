@@ -2,7 +2,7 @@ defmodule Alertlytics.ServiceStatusTest do
   use ExUnit.Case, async: true
 
   setup do
-    {:ok, pid} = Alertlytics.ServiceStatus.start_link(:test_service_status)
+    {:ok, pid} = Alertlytics.ServiceStatus.start_link(:single_service_status)
     {:ok, registry: pid}
   end
 
