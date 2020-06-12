@@ -24,4 +24,5 @@ exclude_paths:
 - config
 - test
 - assets
+- priv
 
