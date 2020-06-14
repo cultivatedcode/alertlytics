@@ -1,4 +1,4 @@
-defmodule Alertlytics.Services.RabbitMqService do
+defmodule Alertlytics.Adapters.RabbitMqAdapter do
   require Logger
 
   @moduledoc """
@@ -11,7 +11,10 @@ defmodule Alertlytics.Services.RabbitMqService do
   @doc """
   Returns true if the url returns a status of 200.
   """
-  def check(url, vhost, queue_name) do
+  def check(config) do
+    url = config["rabbit_admin_url"]
+    vhost = config["rabbit_vhost"]
+    queue_name = config["rabbit_queue_name"]
     HTTPoison.start()
 
     is_live_now =
@@ -19,7 +22,7 @@ defmodule Alertlytics.Services.RabbitMqService do
         {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
           consumers = consumer_count_from_response(body)
           Logger.info(" - '#{queue_name}' has #{consumers} consumers")
-          consumers  > 0
+          consumers > 0
 
         {:error, %HTTPoison.Error{reason: reason}} ->
           Logger.info(inspect(reason))

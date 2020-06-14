@@ -17,6 +17,17 @@
       "config": {
         "health_check_url": "http://web"
       }
+    },
+    {
+      "type": "rabbit_mq",
+      "name": "rabbit_test_queue",
+      "config":
+      {
+        "rabbit_admin_url": "http://guest:guest@rabbit:15672",
+        "rabbit_vhost": "/",
+        "rabbit_queue_name": "test.queue"
+      },
+      "test_interval_in_seconds": 10
     }
   ]
 }

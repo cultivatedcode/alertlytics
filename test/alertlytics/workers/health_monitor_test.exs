@@ -1,10 +1,10 @@
-defmodule HttpHealthCheckTest do
+defmodule HealthMonitorTest do
   use ExUnit.Case
-  alias Alertlytics.Workers.HttpHealthCheck, as: Subject
-  doctest Alertlytics.Workers.HttpHealthCheck
+  alias Alertlytics.Workers.HealthMonitor, as: Subject
+  doctest Alertlytics.Workers.HealthMonitor
 
   setup do
-    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_registry_for_health_check)
+    {:ok, pid} = Alertlytics.MonitorRegistry.start_link(:test_registry_for_health_monitor)
     {:ok, registry: pid}
   end
 

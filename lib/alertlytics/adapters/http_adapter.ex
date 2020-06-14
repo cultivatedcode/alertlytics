@@ -1,4 +1,4 @@
-defmodule Alertlytics.Services.HttpService do
+defmodule Alertlytics.Adapters.HttpAdapter do
   require Logger
 
   @moduledoc """
@@ -11,8 +11,9 @@ defmodule Alertlytics.Services.HttpService do
   @doc """
   Returns true if the url returns a status of 200.
   """
-  def check(url) do
+  def check(config) do
     HTTPoison.start()
+    url = config["health_check_url"]
 
     is_live_now =
       case HTTPoison.get(url) do

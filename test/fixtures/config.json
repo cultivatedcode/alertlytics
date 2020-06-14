@@ -3,7 +3,7 @@
    "services":
    [{
       "type": "http",
-      "name": "marketing-site",
+      "name": "marketing-site-fixture",
       "test_interval_in_seconds": 60,
       "config": {
         "health_check_url": "http://www.cultivatedcode.com"

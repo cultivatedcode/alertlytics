@@ -26,7 +26,7 @@ defmodule Alertlytics.MonitorSupervisor do
   """
   def add_monitor(service_config) do
     Logger.info("-Adding '#{service_config["name"]}'")
-    spec = {Alertlytics.Workers.HttpHealthCheck, service_config}
+    spec = {Alertlytics.Workers.HealthMonitor, service_config}
     DynamicSupervisor.start_child(__MODULE__, spec)
   end
 

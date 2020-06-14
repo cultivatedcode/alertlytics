@@ -13,20 +13,20 @@ defmodule AlertlyticsTest do
 
       assert [
                %{
-                "config" => %{
-                  "health_check_url" => "https://www.cultivatedcode.com"
-                },
-                "name" => "marketing-site",
-                "type" => "http",
-                "test_interval_in_seconds" => 60
+                 "config" => %{
+                   "health_check_url" => "https://www.cultivatedcode.com"
+                 },
+                 "name" => "marketing-site",
+                 "type" => "http",
+                 "test_interval_in_seconds" => 60
                },
                %{
-                "config" => %{
-                  "health_check_url" => "http://web"
-                },
-                "name" => "other",
-                "test_interval_in_seconds" => 10,
-                "type" => "http"
+                 "config" => %{
+                   "health_check_url" => "http://web"
+                 },
+                 "name" => "other",
+                 "test_interval_in_seconds" => 10,
+                 "type" => "http"
                }
              ] == Alertlytics.Workers.Config.services()
     end
