@@ -38,9 +38,11 @@ defmodule HttpHealthCheckTest do
 
   defp service_config do
     %{
-      "health_check_url" => "https://www.google.com",
+      "config" => %{
+        "health_check_url" => "https://www.google.com"
+      },
       "name" => "marketing-site",
-      "type" => "web",
+      "type" => "http",
       "test_interval_in_seconds" => 60
     }
   end

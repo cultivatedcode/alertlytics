@@ -11,10 +11,12 @@ defmodule MonitorSupervisorTest do
 
     {:ok, pid} =
       Alertlytics.MonitorSupervisor.add_monitor(%{
-        "health_check_url" => "https://www.cultivatedcode.com",
         "name" => "marketing-site-test",
-        "type" => "web",
-        "test_interval_in_seconds" => 60
+        "type" => "http",
+        "test_interval_in_seconds" => 60,
+        "config" => %{
+          "health_check_url" => "https://www.cultivatedcode.com"
+        }
       })
 
     assert pid != nil

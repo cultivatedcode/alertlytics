@@ -10,9 +10,11 @@ defmodule AlertTest do
     Subject.start_link(:test_alert)
 
     service_config = %{
-      "health_check_url" => "https://www.cultivatedcode.com",
+      "config" => %{
+        "health_check_url" => "https://www.cultivatedcode.com"
+      },
       "name" => "marketing-site",
-      "type" => "web",
+      "type" => "http",
       "test_interval_in_seconds" => 60
     }
 

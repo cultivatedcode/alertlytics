@@ -25,7 +25,7 @@ defmodule Alertlytics.Workers.Slack do
 
       service_statuses =
         Enum.map(services, fn x ->
-          Alertlytics.Workers.HttpHealthCheck.is_live(x["health_check_url"])
+          Alertlytics.Workers.HttpHealthCheck.is_live(x["config"]["health_check_url"])
         end)
 
       live_count = Enum.count(service_statuses, fn x -> x end)

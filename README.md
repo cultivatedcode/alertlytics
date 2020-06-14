@@ -15,13 +15,13 @@ Alertlytics works with a json config file that defines the end points you would 
    "channel": "#devops",
    "services":
    [{
-      "type": "web",
+      "type": "http",
       "name": "marketing-site",
       "health_check_url": "https://www.cultivatedcode.com",
       "test_interval_in_seconds": 10
    },
    {
-      "type": "web",
+      "type": "http",
       "name": "other",
       "health_check_url": "http://web",
       "test_interval_in_seconds": 60

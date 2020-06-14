@@ -11,10 +11,12 @@ defmodule ConfigTest do
   test "list services" do
     assert [
              %{
-               "health_check_url" => "http://www.cultivatedcode.com",
-               "name" => "marketing-site",
-               "type" => "web",
-               "test_interval_in_seconds" => 60
+              "config" => %{
+                "health_check_url" => "http://www.cultivatedcode.com"
+              },
+              "name" => "marketing-site",
+              "type" => "http",
+              "test_interval_in_seconds" => 60
              }
            ] == Subject.services()
   end

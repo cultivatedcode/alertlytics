@@ -20,10 +20,10 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
     Starts the http health check server.
   """
   def start_link(service_config) do
-    Logger.info(" - Registering Http Health Check (#{service_config["health_check_url"]})")
+    Logger.info(" - Registering Http Health Check (#{service_config["config"]["health_check_url"]})")
 
     GenServer.start_link(__MODULE__, service_config,
-      name: via_tuple(service_config["health_check_url"])
+      name: via_tuple(service_config["config"]["health_check_url"])
     )
   end
 
@@ -52,7 +52,7 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
   end
 
   def handle_info(:work, state) do
-    url = state[:service_config]["health_check_url"]
+    url = state[:service_config]["config"]["health_check_url"]
     is_live_now = Alertlytics.Services.HttpService.check(url)
 
     Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
