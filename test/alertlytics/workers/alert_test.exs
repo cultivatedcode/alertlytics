@@ -13,7 +13,7 @@ defmodule AlertTest do
       "health_check_url" => "https://www.cultivatedcode.com",
       "name" => "marketing-site",
       "type" => "web",
-      "test_interval_in_minutes" => 5
+      "test_interval_in_seconds" => 60
     }
 
     {:ok, service_config: service_config}

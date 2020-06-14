@@ -18,13 +18,13 @@ Alertlytics works with a json config file that defines the end points you would 
       "type": "web",
       "name": "marketing-site",
       "health_check_url": "https://www.cultivatedcode.com",
-      "test_interval_in_minutes": 10
+      "test_interval_in_seconds": 10
    },
    {
       "type": "web",
       "name": "other",
       "health_check_url": "http://web",
-      "test_interval_in_minutes": 50
+      "test_interval_in_seconds": 60
    }
    ]
 }

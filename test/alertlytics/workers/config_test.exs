@@ -14,7 +14,7 @@ defmodule ConfigTest do
                "health_check_url" => "http://www.cultivatedcode.com",
                "name" => "marketing-site",
                "type" => "web",
-               "test_interval_in_minutes" => 5
+               "test_interval_in_seconds" => 60
              }
            ] == Subject.services()
   end

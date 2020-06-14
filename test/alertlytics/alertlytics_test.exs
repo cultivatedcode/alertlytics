@@ -16,12 +16,12 @@ defmodule AlertlyticsTest do
                  "health_check_url" => "https://www.cultivatedcode.com",
                  "name" => "marketing-site",
                  "type" => "web",
-                 "test_interval_in_minutes" => 5
+                 "test_interval_in_seconds" => 60
                },
                %{
                  "health_check_url" => "http://web",
                  "name" => "other",
-                 "test_interval_in_minutes" => 1,
+                 "test_interval_in_seconds" => 10,
                  "type" => "web"
                }
              ] == Alertlytics.Workers.Config.services()

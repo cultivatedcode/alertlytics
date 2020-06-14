@@ -41,10 +41,10 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
   # Server (Callbacks)
 
   def init(service_config) do
-    delay = service_config["test_interval_in_minutes"] * 60_000
+    delay = service_config["test_interval_in_seconds"] * 1_000
 
     Logger.info(
-      "- '#{service_config["name"]}' checking every #{service_config["test_interval_in_minutes"]} minutes."
+      "- '#{service_config["name"]}' checking every #{service_config["test_interval_in_seconds"]} seconds."
     )
 
     schedule_work(delay)

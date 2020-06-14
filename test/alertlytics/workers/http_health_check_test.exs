@@ -41,7 +41,7 @@ defmodule HttpHealthCheckTest do
       "health_check_url" => "https://www.google.com",
       "name" => "marketing-site",
       "type" => "web",
-      "test_interval_in_minutes" => 5
+      "test_interval_in_seconds" => 60
     }
   end
 end
