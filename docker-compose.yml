@@ -1,6 +1,11 @@
 ---
 version: '2'
 services:
+  rabbit:
+    container_name: rabbit
+    image: rabbitmq:3.5.0-management
+    ports:
+      - 15672:15672
   alertlytics:
     container_name: alertlytics
     volumes:

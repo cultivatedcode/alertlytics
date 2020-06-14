@@ -1,29 +1,33 @@
-defmodule Alertlytics.Workers.HttpHealthCheck do
+defmodule Alertlytics.Workers.HealthMonitor do
   use GenServer
   require Logger
 
   @moduledoc """
-  Documentation for HttpHealthCheck.
-  Checks http web services for the health status based on the services configured interval.
+  Documentation for HealthMonitor.
+  Generic health monitor that can monitor any type of service based on a polling interval.
   """
 
   # Client
 
   @doc """
-    Starts the http health check server for dynamic supervision.
+    Starts the health monitor server for dynamic supervision.
   """
   def start_link([], service_config) do
     start_link(service_config)
   end
 
   @doc """
-    Starts the http health check server.
+    Starts the health monitor server.
   """
   def start_link(service_config) do
-    Logger.info(" - Registering Http Health Check (#{service_config["health_check_url"]})")
+    Logger.info(
+      " - Registering Health Monitor (name: #{service_config["name"]}, type: #{
+        service_config["type"]
+      })"
+    )
 
     GenServer.start_link(__MODULE__, service_config,
-      name: via_tuple(service_config["health_check_url"])
+      name: via_tuple("#{service_config["type"]}-#{service_config["name"]}")
     )
   end
 
@@ -41,10 +45,10 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
   # Server (Callbacks)
 
   def init(service_config) do
-    delay = service_config["test_interval_in_minutes"] * 60_000
+    delay = service_config["test_interval_in_seconds"] * 1_000
 
     Logger.info(
-      "- '#{service_config["name"]}' checking every #{service_config["test_interval_in_minutes"]} minutes."
+      "- '#{service_config["name"]}' checking every #{service_config["test_interval_in_seconds"]} seconds."
     )
 
     schedule_work(delay)
@@ -52,8 +56,9 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
   end
 
   def handle_info(:work, state) do
-    url = state[:service_config]["health_check_url"]
-    is_live_now = Alertlytics.Services.HttpService.check(url)
+    config = state[:service_config]["config"]
+    monitor_module = build_monitor_module(state[:service_config]["type"])
+    is_live_now = monitor_module.check(config)
 
     Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
 
@@ -79,5 +84,13 @@ defmodule Alertlytics.Workers.HttpHealthCheck do
 
   defp schedule_work(delay_in_minutes) do
     Process.send_after(self(), :work, delay_in_minutes)
+  end
+
+  defp build_monitor_module(type) do
+    case type do
+      "http" -> Alertlytics.Adapters.HttpAdapter
+      "rabbit_mq" -> Alertlytics.Adapters.RabbitMqAdapter
+      _ -> Alertlytics.Adapters.HttpAdapter
+    end
   end
 end
