@@ -29,6 +29,7 @@ WORKDIR /app
 USER nobody
 
 COPY --from=build /app/_build/prod/rel/alertlytics ./
+RUN chmod 755 /app/bin/alertlytics
 
 VOLUME /etc/alertlytics
 ENV REPLACE_OS_VARS=true
