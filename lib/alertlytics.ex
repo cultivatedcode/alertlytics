@@ -21,8 +21,11 @@ defmodule Alertlytics do
         {:ok, path} ->
           path
 
-        _ ->
+        :error ->
           "/etc/alertlytics/config.json"
+
+        path ->
+          path
       end
 
     Logger.info("config_path: '#{config_path}'")
