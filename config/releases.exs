@@ -4,9 +4,9 @@
 # remember to add this file to your .gitignore.
 import Config
 
-config :alertlytics, Alertlytics, config_path: "${CONFIG_PATH}"
-config :alertlytics, Alertlytics.Workers.Slack, token: "${SLACK_TOKEN}"
-config :slack, api_token: "${SLACK_TOKEN}"
+config :alertlytics, Alertlytics, config_path: System.fetch_env("CONFIG_PATH")
+config :alertlytics, Alertlytics.Workers.Slack, token: System.fetch_env("SLACK_TOKEN")
+config :slack, api_token: System.fetch_env("SLACK_TOKEN")
 
 # For development, we disable any cache and enable
 # debugging and code reloading.

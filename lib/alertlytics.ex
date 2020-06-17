@@ -18,14 +18,11 @@ defmodule Alertlytics do
 
     config_path =
       case Application.get_env(:alertlytics, Alertlytics)[:config_path] do
-        nil ->
-          "/etc/alertlytics/config.json"
-
-        "" ->
-          "/etc/alertlytics/config.json"
+        {:ok, path} ->
+          path
 
         _ ->
-          Application.get_env(:alertlytics, Alertlytics)[:config_path]
+          "/etc/alertlytics/config.json"
       end
 
     Logger.info("config_path: '#{config_path}'")
