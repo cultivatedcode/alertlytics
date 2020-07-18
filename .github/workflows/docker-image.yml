@@ -22,6 +22,7 @@ jobs:
         image-reference: "localbuild/alertlytics:latest"
         dockerfile-path: "Dockerfile.prod"
         fail-build: true
+        acs-report-enable: true
     - name: Anchore inline scan JSON results
       run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
     - name: Anchore action SARIF report
