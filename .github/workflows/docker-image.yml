@@ -9,15 +9,13 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile.prod --tag cultivatedcode/alertlytics:$(date +%s)
-    - name: Tag and Push
-      run: |
-        docker tag cultivatedcode/alertlytics:$(date +%s) docker.io/cultivatedcode/alertlytics:$(date +%s)
-        docker push docker.io/cultivatedcode/alertlytics:$(date +%s)
-      
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: cultivatedcode/alertlytics
+        tags: latest,$(date +%s)      
