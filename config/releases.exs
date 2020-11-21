@@ -17,6 +17,7 @@ config :slack, api_token: System.fetch_env("SLACK_TOKEN")
 
 config :alertlytics, AlertlyticsWeb.Endpoint,
   http: [port: 4000],
+  check_origin: false,
   code_reloader: false,
   server: true
 

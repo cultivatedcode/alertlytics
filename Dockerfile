@@ -1,9 +1,8 @@
-FROM elixir:1.10
+FROM elixir:1.10-alpine
 
 WORKDIR /home/app
 COPY . /home/app
 
-RUN apt-get update -y
-RUN apt-get install -y npm nodejs
+RUN apk add --update nodejs nodejs-npm
 
 COPY alertlytics-config.json /etc/alertlytics/config.json
