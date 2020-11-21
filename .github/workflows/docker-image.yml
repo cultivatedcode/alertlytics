@@ -16,14 +16,14 @@ jobs:
       uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile.prod --tag localbuild/alertlytics:latest
-    - name: Scan image
-      uses: anchore/scan-action@v1
-      with:
-        image-reference: "localbuild/alertlytics:latest"
-        dockerfile-path: "Dockerfile.prod"
-        fail-build: true
-    - name: Anchore inline scan JSON results
-      run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
+    # - name: Scan image
+    #   uses: anchore/scan-action@v1
+    #   with:
+    #     image-reference: "localbuild/alertlytics:latest"
+    #     dockerfile-path: "Dockerfile.prod"
+    #     fail-build: true
+    # - name: Anchore inline scan JSON results
+    #   run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
     - name: Build and push Docker images
       uses: docker/build-push-action@v1
       with:
@@ -32,4 +32,4 @@ jobs:
         repository: cultivatedcode/alertlytics
         dockerfile: Dockerfile.prod
         tag_with_ref: true
-        tag_with_sha: true  
+        tag_with_sha: true
