@@ -6,6 +6,7 @@ import Config
 
 config :alertlytics, Alertlytics, config_path: System.fetch_env("CONFIG_PATH")
 config :alertlytics, Alertlytics.Workers.Slack, token: System.fetch_env("SLACK_TOKEN")
+config :alertlytics, webhook: System.fetch_env("WEBHOOK_URL")
 config :slack, api_token: System.fetch_env("SLACK_TOKEN")
 
 # For development, we disable any cache and enable

@@ -26,6 +26,8 @@ defmodule Alertlytics.Workers.HealthMonitor do
       })"
     )
 
+    Alertlytics.Services.WebhookService.post_message(service_config["name"], "unknown")
+
     GenServer.start_link(__MODULE__, service_config,
       name: via_tuple("#{service_config["type"]}-#{service_config["name"]}")
     )
