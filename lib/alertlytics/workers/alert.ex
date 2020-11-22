@@ -55,6 +55,7 @@ defmodule Alertlytics.Workers.Alert do
 
   def handle_cast({:add_alert, service_config, previous_is_live, new_is_live}, state) do
     status = if new_is_live, do: "up", else: "down"
+
     if previous_is_live != new_is_live && previous_is_live != nil do
       service_state = %{
         service_config: service_config,
@@ -97,7 +98,6 @@ defmodule Alertlytics.Workers.Alert do
 
         attachment
       end)
-
 
     if Enum.count(attachments) > 0 do
       channel = Alertlytics.Workers.Config.channel()

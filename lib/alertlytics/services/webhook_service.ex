@@ -12,8 +12,9 @@ defmodule Alertlytics.Services.WebhookService do
   def post_message(name, state) do
     webhook_url = Application.get_env(:alertlytics, :webhook)
 
-    if (webhook_url != nil) do
+    if webhook_url != nil do
       Logger.info("SENDING")
+
       payload = %{
         state: state,
         name: name,
@@ -21,11 +22,13 @@ defmodule Alertlytics.Services.WebhookService do
       }
 
       headers = [{"Content-type", "application/json"}]
-      {status, res} = HTTPoison.post(
-        webhook_url,
-        Poison.encode!(payload),
-        headers
-      )
+
+      {status, res} =
+        HTTPoison.post(
+          webhook_url,
+          Poison.encode!(payload),
+          headers
+        )
     end
   end
 end
