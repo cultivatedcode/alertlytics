@@ -9,15 +9,16 @@ defmodule Alertlytics.Services.WebhookService do
   @doc """
   Posts a message to the webhook.
   """
-  def post_message(name, state) do
+  def post_message(name, state, duration_in_ms) do
     webhook_url = Application.get_env(:alertlytics, :webhook)
 
     if webhook_url != nil do
-      Logger.info("SENDING")
+      Logger.info("SENDING #{webhook_url}")
 
       payload = %{
         state: state,
         name: name,
+        duration_in_ms: duration_in_ms,
         ns: DateTime.to_unix(DateTime.utc_now())
       }
 

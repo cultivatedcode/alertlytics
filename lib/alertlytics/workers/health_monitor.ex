@@ -26,8 +26,6 @@ defmodule Alertlytics.Workers.HealthMonitor do
       })"
     )
 
-    Alertlytics.Services.WebhookService.post_message(service_config["name"], "unknown")
-
     GenServer.start_link(__MODULE__, service_config,
       name: via_tuple("#{service_config["type"]}-#{service_config["name"]}")
     )
@@ -60,9 +58,17 @@ defmodule Alertlytics.Workers.HealthMonitor do
   def handle_info(:work, state) do
     config = state[:service_config]["config"]
     monitor_module = build_monitor_module(state[:service_config]["type"])
-    is_live_now = monitor_module.check(config)
+    {duration, is_live_now} = :timer.tc(fn -> monitor_module.check(config) end)
 
     Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
+
+    status = if is_live_now, do: "up", else: "down"
+
+    Alertlytics.Services.WebhookService.post_message(
+      state[:service_config]["name"],
+      status,
+      duration
+    )
 
     Alertlytics.Workers.Alert.update_alert(
       state[:service_config],
