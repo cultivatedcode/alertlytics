@@ -10,7 +10,7 @@ defmodule Alertlytics.Services.WebhookService do
   Posts a message to the webhook.
   """
   def post_message(name, state, duration_in_ms) do
-    webhook_url = Application.get_env(:alertlytics, :webhook)
+    {:ok, webhook_url} = Application.get_env(:alertlytics, :webhook)
 
     if webhook_url != nil do
       Logger.info("SENDING #{webhook_url}")
