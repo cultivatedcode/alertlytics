@@ -1,5 +1,6 @@
 defmodule Alertlytics.Workers.Alert do
   use GenServer
+  require Logger
 
   @moduledoc """
   Documentation for Alert.
@@ -25,8 +26,11 @@ defmodule Alertlytics.Workers.Alert do
   @doc """
     Optionally queue an alert based on whether the previous_is_live is different from the new_is_live.
   """
-  def update_alert(service_config, previous_is_live, new_is_live) do
-    GenServer.cast(__MODULE__, {:add_alert, service_config, previous_is_live, new_is_live})
+  def update_alert(service_config, previous_is_live, new_is_live, duration) do
+    GenServer.cast(
+      __MODULE__,
+      {:add_alert, service_config, previous_is_live, new_is_live, duration}
+    )
   end
 
   # Server (Callbacks)
@@ -37,7 +41,17 @@ defmodule Alertlytics.Workers.Alert do
   end
 
   def handle_info(:work, state) do
-    alert(state)
+    slack_token = Application.get_env(:alertlytics, Alertlytics.Workers.Slack)[:token]
+
+    if slack_token != "" do
+      slack_alert(state)
+    end
+
+    {:ok, webhook_url} = Application.get_env(:alertlytics, :webhook)
+
+    if webhook_url != "" do
+      webhook_alert(state)
+    end
 
     schedule_work()
 
@@ -53,12 +67,13 @@ defmodule Alertlytics.Workers.Alert do
     Process.send_after(self(), :work, one_minute)
   end
 
-  def handle_cast({:add_alert, service_config, previous_is_live, new_is_live}, state) do
-    if previous_is_live != new_is_live && previous_is_live != nil do
+  def handle_cast({:add_alert, service_config, previous_is_live, new_is_live, duration}, state) do
+    if previous_is_live != new_is_live do
       service_state = %{
         service_config: service_config,
         new_is_live: new_is_live,
-        previous_is_live: previous_is_live
+        previous_is_live: previous_is_live,
+        duration: duration
       }
 
       {:noreply, [service_state | state]}
@@ -67,14 +82,18 @@ defmodule Alertlytics.Workers.Alert do
     end
   end
 
-  def alert(state) do
+  def slack_alert(state) do
     attachments =
       Enum.map(state, fn service_detail ->
         string_state =
-          if service_detail[:new_is_live] do
-            "fixed"
+          if service_detail[:previous_is_live] == nil do
+            "live"
           else
-            "failed"
+            if service_detail[:new_is_live] do
+              "fixed"
+            else
+              "failed"
+            end
           end
 
         color =
@@ -106,5 +125,27 @@ defmodule Alertlytics.Workers.Alert do
     end
 
     attachments
+  end
+
+  def webhook_alert(state) do
+    Enum.each(state, fn service_detail ->
+      string_state =
+        if service_detail[:previous_is_live] == nil do
+          "live"
+        else
+          if service_detail[:new_is_live] do
+            "fixed"
+          else
+            "failed"
+          end
+        end
+
+      Alertlytics.Services.WebhookService.post_message(
+        service_detail[:service_config]["id"],
+        service_detail[:service_config]["name"],
+        string_state,
+        service_detail[:duration]
+      )
+    end)
   end
 end

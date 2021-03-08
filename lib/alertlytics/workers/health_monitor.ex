@@ -62,18 +62,11 @@ defmodule Alertlytics.Workers.HealthMonitor do
 
     Alertlytics.ServiceStatus.update(state[:service_config]["name"], is_live_now)
 
-    status = if is_live_now, do: "up", else: "down"
-
-    Alertlytics.Services.WebhookService.post_message(
-      state[:service_config]["name"],
-      status,
-      duration
-    )
-
     Alertlytics.Workers.Alert.update_alert(
       state[:service_config],
       state[:is_live],
-      is_live_now
+      is_live_now,
+      duration
     )
 
     schedule_work(state[:delay])

@@ -15,6 +15,7 @@ Alertlytics works with a json config file that defines the end points you would 
    "channel": "#devops",
    "services":
    [{
+      "id": "myco-marketingsite",
       "type": "http",
       "name": "marketing-site",
       "test_interval_in_seconds": 10,
@@ -23,6 +24,7 @@ Alertlytics works with a json config file that defines the end points you would 
       }
    },
    {
+      "id": "myco-other",
       "type": "http",
       "name": "other",
       "test_interval_in_seconds": 60,
@@ -68,6 +70,7 @@ The http monitor makes a simple GET request to the specified `health_check_url` 
    "channel": "#devops",
    "services":
    [{
+      "id": "myco-marketingsite",
       "type": "http",
       "name": "marketing-site",
       "test_interval_in_seconds": 10,
@@ -88,6 +91,7 @@ The [RabbitMQ](https://www.rabbitmq.com/) monitor uses the RabbitMQ Admin UI to 
   "services":
   [
     {
+      "id": "myco-rabbitmq",
       "type": "rabbit_mq",
       "name": "rabbit_test_queue",
       "config":

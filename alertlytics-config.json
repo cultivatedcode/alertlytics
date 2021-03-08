@@ -3,6 +3,7 @@
   "services":
   [
     {
+      "id": "myco-marketingsite",
       "type": "http",
       "name": "marketing-site",
       "test_interval_in_seconds": 60,
@@ -11,6 +12,7 @@
       }
     },
     {
+      "id": "myco-other",
       "type": "http",
       "name": "other",
       "test_interval_in_seconds": 10,
@@ -19,6 +21,7 @@
       }
     },
     {
+      "id": "myco-rabbitmq",
       "type": "rabbit_mq",
       "name": "rabbit_test_queue",
       "config":
